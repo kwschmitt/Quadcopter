@@ -1,0 +1,368 @@
+Version 3.2 HI-TECH Software Intermediate Code
+"45 pid.h
+[v _rollPid `(v ~T0 @X0 0 ef1`f ]
+"46
+[v _pitchPid `(v ~T0 @X0 0 ef1`f ]
+"47
+[v _yawPid `(v ~T0 @X0 0 ef1`f ]
+"16 pid.h
+[v _rollkp `f ~T0 @X0 1 e ]
+[; ;pid.h: 16: float rollkp;
+"17
+[v _rollki `f ~T0 @X0 1 e ]
+[; ;pid.h: 17: float rollki;
+"18
+[v _rollkd `f ~T0 @X0 1 e ]
+[; ;pid.h: 18: float rollkd;
+"19
+[v _rollAdj `i ~T0 @X0 1 e ]
+[; ;pid.h: 19: int rollAdj;
+"20
+[v _rollPreviousError `f ~T0 @X0 1 e ]
+[; ;pid.h: 20: float rollPreviousError;
+"21
+[v _rollIntegral `f ~T0 @X0 1 e ]
+[; ;pid.h: 21: float rollIntegral;
+"23
+[v _pitchkp `f ~T0 @X0 1 e ]
+[; ;pid.h: 23: float pitchkp;
+"24
+[v _pitchki `f ~T0 @X0 1 e ]
+[; ;pid.h: 24: float pitchki;
+"25
+[v _pitchkd `f ~T0 @X0 1 e ]
+[; ;pid.h: 25: float pitchkd;
+"26
+[v _pitchAdj `i ~T0 @X0 1 e ]
+[; ;pid.h: 26: int pitchAdj;
+"27
+[v _pitchPreviousError `f ~T0 @X0 1 e ]
+[; ;pid.h: 27: float pitchPreviousError;
+"28
+[v _pitchIntegral `f ~T0 @X0 1 e ]
+[; ;pid.h: 28: float pitchIntegral;
+"30
+[v _yawkp `f ~T0 @X0 1 e ]
+[; ;pid.h: 30: float yawkp;
+"31
+[v _yawki `f ~T0 @X0 1 e ]
+[; ;pid.h: 31: float yawki;
+"32
+[v _yawkd `f ~T0 @X0 1 e ]
+[; ;pid.h: 32: float yawkd;
+"33
+[v _yawAdj `i ~T0 @X0 1 e ]
+[; ;pid.h: 33: int yawAdj;
+"34
+[v _yawPreviousError `f ~T0 @X0 1 e ]
+[; ;pid.h: 34: float yawPreviousError;
+"35
+[v _yawIntegral `f ~T0 @X0 1 e ]
+[; ;pid.h: 35: float yawIntegral;
+"37
+[v _throttle1 `i ~T0 @X0 1 e ]
+[i _throttle1
+-> 0 `i
+]
+[; ;pid.h: 37: int throttle1 = 0;
+"38
+[v _throttle2 `i ~T0 @X0 1 e ]
+[i _throttle2
+-> 0 `i
+]
+[; ;pid.h: 38: int throttle2 = 0;
+"39
+[v _throttle3 `i ~T0 @X0 1 e ]
+[i _throttle3
+-> 0 `i
+]
+[; ;pid.h: 39: int throttle3 = 0;
+"40
+[v _throttle4 `i ~T0 @X0 1 e ]
+[i _throttle4
+-> 0 `i
+]
+[; ;pid.h: 40: int throttle4 = 0;
+[; ;pid.h: 43: void pid_Init();
+[; ;pid.h: 44: void pid( float desiredRoll, float desiredPitch, float desiredYaw );
+[; ;pid.h: 45: void rollPid( float desiredRoll );
+[; ;pid.h: 46: void pitchPid( float desiredPitch );
+[; ;pid.h: 47: void yawPid( float desiredYaw );
+"20 calculations.h
+[v _roll `f ~T0 @X0 1 e ]
+[i _roll
+-> -> 0 `i `f
+]
+[; ;calculations.h: 20: float roll = 0;
+"21
+[v _pitch `f ~T0 @X0 1 e ]
+[i _pitch
+-> -> 0 `i `f
+]
+[; ;calculations.h: 21: float pitch = 0;
+"22
+[v _yaw `f ~T0 @X0 1 e ]
+[i _yaw
+-> -> 0 `i `f
+]
+[; ;calculations.h: 22: float yaw = 0;
+[; ;calculations.h: 25: void computeRollPitch(void);
+[; ;calculations.h: 27: float fastatan2( float x, float y );
+[; ;calculations.h: 28: float maximum( float x, float y );
+[; ;calculations.h: 29: float minimum( float x, float y );
+"20 sensors.h
+[v _ax `f ~T0 @X0 1 e ]
+[; ;sensors.h: 20: float ax;
+"21
+[v _ay `f ~T0 @X0 1 e ]
+[; ;sensors.h: 21: float ay;
+"22
+[v _az `f ~T0 @X0 1 e ]
+[; ;sensors.h: 22: float az;
+"24
+[v _gx `f ~T0 @X0 1 e ]
+[; ;sensors.h: 24: float gx;
+"25
+[v _gy `f ~T0 @X0 1 e ]
+[; ;sensors.h: 25: float gy;
+"26
+[v _gz `f ~T0 @X0 1 e ]
+[; ;sensors.h: 26: float gz;
+[; ;sensors.h: 29: void sensors_Init(void);
+[; ;sensors.h: 30: void accel_Init(void);
+[; ;sensors.h: 31: void gyro_Init(void);
+[; ;sensors.h: 32: void readSensors(void);
+[; ;sensors.h: 33: void readAccel(void);
+[; ;sensors.h: 34: void readGyro(void);
+[; ;__size_t.h: 4: typedef unsigned size_t;
+[; ;stdarg.h: 7: typedef void * va_list[1];
+[; ;stdarg.h: 10: extern void * __va_start(void);
+[; ;stdarg.h: 13: extern void * __va_arg(void *, ...);
+[; ;stdio.h: 43: struct __prbuf
+[; ;stdio.h: 44: {
+[; ;stdio.h: 45: char * ptr;
+[; ;stdio.h: 46: void (* func)(char);
+[; ;stdio.h: 47: };
+[; ;errno.h: 29: extern int errno;
+[; ;conio.h: 12: extern void init_uart(void);
+[; ;conio.h: 14: extern char getch(void);
+[; ;conio.h: 15: extern char getche(void);
+[; ;conio.h: 16: extern void putch(char);
+[; ;conio.h: 17: extern void ungetch(char);
+[; ;conio.h: 19: extern __bit kbhit(void);
+[; ;conio.h: 23: extern char * cgets(char *);
+[; ;conio.h: 24: extern void cputs(const char *);
+[; ;stdio.h: 88: extern int cprintf(char *, ...);
+[; ;stdio.h: 93: extern int _doprnt(struct __prbuf *, const register char *, register va_list);
+[; ;stdio.h: 183: extern char * gets(char *);
+[; ;stdio.h: 184: extern int puts(const char *);
+[; ;stdio.h: 185: extern int scanf(const char *, ...) __attribute__((unsupported("scanf() is not supported by this compiler")));
+[; ;stdio.h: 186: extern int sscanf(const char *, const char *, ...) __attribute__((unsupported("sscanf() is not supported by this compiler")));
+[; ;stdio.h: 187: extern int vprintf(const char *, va_list) __attribute__((unsupported("vprintf() is not supported by this compiler")));
+[; ;stdio.h: 188: extern int vsprintf(char *, const char *, va_list) __attribute__((unsupported("vsprintf() is not supported by this compiler")));
+[; ;stdio.h: 189: extern int vscanf(const char *, va_list ap) __attribute__((unsupported("vscanf() is not supported by this compiler")));
+[; ;stdio.h: 190: extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
+[; ;stdio.h: 194: extern int sprintf(char *, const char *, ...);
+[; ;stdio.h: 195: extern int printf(const char *, ...);
+"8 pid.c
+[v _pid_Init `(v ~T0 @X0 1 ef ]
+{
+[; ;pid.c: 8: void pid_Init() {
+[e :U _pid_Init ]
+[f ]
+[; ;pid.c: 9: rollkp = 0;
+"9
+[e = _rollkp -> -> 0 `i `f ]
+[; ;pid.c: 10: rollki = 0;
+"10
+[e = _rollki -> -> 0 `i `f ]
+[; ;pid.c: 11: rollkd = 0;
+"11
+[e = _rollkd -> -> 0 `i `f ]
+[; ;pid.c: 12: rollPreviousError = 0;
+"12
+[e = _rollPreviousError -> -> 0 `i `f ]
+[; ;pid.c: 13: rollIntegral = 0;
+"13
+[e = _rollIntegral -> -> 0 `i `f ]
+[; ;pid.c: 15: pitchkp = 0;
+"15
+[e = _pitchkp -> -> 0 `i `f ]
+[; ;pid.c: 16: pitchki = 0;
+"16
+[e = _pitchki -> -> 0 `i `f ]
+[; ;pid.c: 17: pitchkd = 0;
+"17
+[e = _pitchkd -> -> 0 `i `f ]
+[; ;pid.c: 18: pitchPreviousError = 0;
+"18
+[e = _pitchPreviousError -> -> 0 `i `f ]
+[; ;pid.c: 19: pitchIntegral = 0;
+"19
+[e = _pitchIntegral -> -> 0 `i `f ]
+[; ;pid.c: 21: yawkp = 0;
+"21
+[e = _yawkp -> -> 0 `i `f ]
+[; ;pid.c: 22: yawki = 0;
+"22
+[e = _yawki -> -> 0 `i `f ]
+[; ;pid.c: 23: yawkd = 0;
+"23
+[e = _yawkd -> -> 0 `i `f ]
+[; ;pid.c: 24: yawPreviousError = 0;
+"24
+[e = _yawPreviousError -> -> 0 `i `f ]
+[; ;pid.c: 25: yawIntegral = 0;
+"25
+[e = _yawIntegral -> -> 0 `i `f ]
+[; ;pid.c: 26: }
+"26
+[e :UE 2 ]
+}
+"28
+[v _pid `(v ~T0 @X0 1 ef3`f`f`f ]
+{
+[; ;pid.c: 28: void pid( float desiredRoll, float desiredPitch, float desiredYaw ) {
+[e :U _pid ]
+[v _desiredRoll `f ~T0 @X0 1 r1 ]
+[v _desiredPitch `f ~T0 @X0 1 r2 ]
+[v _desiredYaw `f ~T0 @X0 1 r3 ]
+[f ]
+[; ;pid.c: 30: rollPid( desiredRoll );
+"30
+[e ( _rollPid (1 _desiredRoll ]
+[; ;pid.c: 31: pitchPid( desiredPitch );
+"31
+[e ( _pitchPid (1 _desiredPitch ]
+[; ;pid.c: 32: yawPid( desiredYaw );
+"32
+[e ( _yawPid (1 _desiredYaw ]
+"35
+[v _throttle `i ~T0 @X0 0 e ]
+[; ;pid.c: 35: extern int throttle;
+[; ;pid.c: 36: throttle1 = throttle - rollAdj;
+"36
+[e = _throttle1 - _throttle _rollAdj ]
+[; ;pid.c: 37: throttle2 = throttle + rollAdj;
+"37
+[e = _throttle2 + _throttle _rollAdj ]
+[; ;pid.c: 38: throttle3 = throttle + rollAdj;
+"38
+[e = _throttle3 + _throttle _rollAdj ]
+[; ;pid.c: 39: throttle4 = throttle - rollAdj;
+"39
+[e = _throttle4 - _throttle _rollAdj ]
+[; ;pid.c: 42: if ( throttle1 < 0 ) {
+"42
+[e $ ! < _throttle1 -> 0 `i 4  ]
+{
+[; ;pid.c: 43: throttle1 = 0;
+"43
+[e = _throttle1 -> 0 `i ]
+[; ;pid.c: 44: throttle4 = 0;
+"44
+[e = _throttle4 -> 0 `i ]
+"45
+}
+[e :U 4 ]
+[; ;pid.c: 45: }
+[; ;pid.c: 46: if ( throttle1 > 300 ) {
+"46
+[e $ ! > _throttle1 -> 300 `i 5  ]
+{
+[; ;pid.c: 47: throttle1 = 300;
+"47
+[e = _throttle1 -> 300 `i ]
+[; ;pid.c: 48: throttle4 = 300;
+"48
+[e = _throttle4 -> 300 `i ]
+"49
+}
+[e :U 5 ]
+[; ;pid.c: 49: }
+[; ;pid.c: 51: if ( throttle2 < 0 ) {
+"51
+[e $ ! < _throttle2 -> 0 `i 6  ]
+{
+[; ;pid.c: 52: throttle2 = 0;
+"52
+[e = _throttle2 -> 0 `i ]
+[; ;pid.c: 53: throttle3 = 0;
+"53
+[e = _throttle3 -> 0 `i ]
+"54
+}
+[e :U 6 ]
+[; ;pid.c: 54: }
+[; ;pid.c: 55: if ( throttle2 > 300 ) {
+"55
+[e $ ! > _throttle2 -> 300 `i 7  ]
+{
+[; ;pid.c: 56: throttle2 = 300;
+"56
+[e = _throttle2 -> 300 `i ]
+[; ;pid.c: 57: throttle3 = 300;
+"57
+[e = _throttle3 -> 300 `i ]
+"58
+}
+[e :U 7 ]
+[; ;pid.c: 58: }
+[; ;pid.c: 59: }
+"59
+[e :UE 3 ]
+}
+"61
+[v _rollPid `(v ~T0 @X0 1 ef1`f ]
+{
+[; ;pid.c: 61: void rollPid( float desiredRoll ) {
+[e :U _rollPid ]
+[v _desiredRoll `f ~T0 @X0 1 r1 ]
+[f ]
+"63
+[v _rollError `f ~T0 @X0 1 a ]
+"64
+[v _changeInError `f ~T0 @X0 1 a ]
+[; ;pid.c: 63: float rollError;
+[; ;pid.c: 64: float changeInError;
+[; ;pid.c: 67: rollError = desiredRoll - roll;
+"67
+[e = _rollError - _desiredRoll _roll ]
+[; ;pid.c: 68: changeInError = rollPreviousError - rollError;
+"68
+[e = _changeInError - _rollPreviousError _rollError ]
+[; ;pid.c: 69: rollIntegral += rollError;
+"69
+[e =+ _rollIntegral _rollError ]
+[; ;pid.c: 72: rollAdj = (int)((rollkp*rollError) - (rollkd*changeInError) + (rollki * rollIntegral));
+"72
+[e = _rollAdj -> + - * _rollkp _rollError * _rollkd _changeInError * _rollki _rollIntegral `i ]
+[; ;pid.c: 75: rollPreviousError = rollError;
+"75
+[e = _rollPreviousError _rollError ]
+[; ;pid.c: 76: }
+"76
+[e :UE 8 ]
+}
+"78
+[v _pitchPid `(v ~T0 @X0 1 ef1`f ]
+{
+[; ;pid.c: 78: void pitchPid( float desiredPitch ) {
+[e :U _pitchPid ]
+[v _desiredPitch `f ~T0 @X0 1 r1 ]
+[f ]
+[; ;pid.c: 80: }
+"80
+[e :UE 9 ]
+}
+"82
+[v _yawPid `(v ~T0 @X0 1 ef1`f ]
+{
+[; ;pid.c: 82: void yawPid( float desiredYaw ) {
+[e :U _yawPid ]
+[v _desiredYaw `f ~T0 @X0 1 r1 ]
+[f ]
+[; ;pid.c: 84: }
+"84
+[e :UE 10 ]
+}

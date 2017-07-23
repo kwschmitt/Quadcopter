@@ -1,0 +1,208 @@
+Version 3.2 HI-TECH Software Intermediate Code
+"16 kalman.h
+[s S1 `f 1 `f 1 `f 1 `f 1 `f 1 ]
+[n S1 . q r x p k ]
+[; ;kalman.h: 16: typedef struct {
+[; ;kalman.h: 17: float q;
+[; ;kalman.h: 18: float r;
+[; ;kalman.h: 19: float x;
+[; ;kalman.h: 20: float p;
+[; ;kalman.h: 21: float k;
+[; ;kalman.h: 22: } kalman_state;
+[; ;kalman.h: 25: void kalman_Init(void);
+[; ;kalman.h: 26: void kalmanUpdate(kalman_state* state, float measurement);
+[; ;kalman.h: 27: void filterData(void);
+"20 sensors.h
+[v _ax `f ~T0 @X0 1 e ]
+[; ;sensors.h: 20: float ax;
+"21
+[v _ay `f ~T0 @X0 1 e ]
+[; ;sensors.h: 21: float ay;
+"22
+[v _az `f ~T0 @X0 1 e ]
+[; ;sensors.h: 22: float az;
+"24
+[v _gx `f ~T0 @X0 1 e ]
+[; ;sensors.h: 24: float gx;
+"25
+[v _gy `f ~T0 @X0 1 e ]
+[; ;sensors.h: 25: float gy;
+"26
+[v _gz `f ~T0 @X0 1 e ]
+[; ;sensors.h: 26: float gz;
+[; ;sensors.h: 29: void sensors_Init(void);
+[; ;sensors.h: 30: void accel_Init(void);
+[; ;sensors.h: 31: void gyro_Init(void);
+[; ;sensors.h: 32: void readSensors(void);
+[; ;sensors.h: 33: void readAccel(void);
+[; ;sensors.h: 34: void readGyro(void);
+"5 kalman.c
+[v _axState `S1 ~T0 @X0 1 e ]
+[; ;kalman.c: 5: kalman_state axState;
+"6
+[v _ayState `S1 ~T0 @X0 1 e ]
+[; ;kalman.c: 6: kalman_state ayState;
+"7
+[v _azState `S1 ~T0 @X0 1 e ]
+[; ;kalman.c: 7: kalman_state azState;
+"8
+[v _gxState `S1 ~T0 @X0 1 e ]
+[; ;kalman.c: 8: kalman_state gxState;
+"9
+[v _gyState `S1 ~T0 @X0 1 e ]
+[; ;kalman.c: 9: kalman_state gyState;
+"10
+[v _gzState `S1 ~T0 @X0 1 e ]
+[; ;kalman.c: 10: kalman_state gzState;
+"13
+[v _kalman_Init `(v ~T0 @X0 1 ef ]
+{
+[; ;kalman.c: 13: void kalman_Init() {
+[e :U _kalman_Init ]
+[f ]
+[; ;kalman.c: 16: axState.x = ax;
+"16
+[e = . _axState 2 _ax ]
+[; ;kalman.c: 17: axState.p = 1;
+"17
+[e = . _axState 3 -> -> 1 `i `f ]
+[; ;kalman.c: 18: axState.q = .001;
+"18
+[e = . _axState 0 -> .0.001 `f ]
+[; ;kalman.c: 19: axState.r = .3;
+"19
+[e = . _axState 1 -> .0.3 `f ]
+[; ;kalman.c: 21: ayState.x = ay;
+"21
+[e = . _ayState 2 _ay ]
+[; ;kalman.c: 22: ayState.p = 1;
+"22
+[e = . _ayState 3 -> -> 1 `i `f ]
+[; ;kalman.c: 23: ayState.q = .001;
+"23
+[e = . _ayState 0 -> .0.001 `f ]
+[; ;kalman.c: 24: ayState.r = .3;
+"24
+[e = . _ayState 1 -> .0.3 `f ]
+[; ;kalman.c: 26: azState.x = az;
+"26
+[e = . _azState 2 _az ]
+[; ;kalman.c: 27: azState.p =1;
+"27
+[e = . _azState 3 -> -> 1 `i `f ]
+[; ;kalman.c: 28: azState.q = .015;
+"28
+[e = . _azState 0 -> .0.015 `f ]
+[; ;kalman.c: 29: azState.r = .3;
+"29
+[e = . _azState 1 -> .0.3 `f ]
+[; ;kalman.c: 32: gxState.x = gx;
+"32
+[e = . _gxState 2 _gx ]
+[; ;kalman.c: 33: gxState.p = 1;
+"33
+[e = . _gxState 3 -> -> 1 `i `f ]
+[; ;kalman.c: 34: gxState.q = .07;
+"34
+[e = . _gxState 0 -> .0.07 `f ]
+[; ;kalman.c: 35: gxState.r = .75;
+"35
+[e = . _gxState 1 -> .0.75 `f ]
+[; ;kalman.c: 37: gyState.x = gy;
+"37
+[e = . _gyState 2 _gy ]
+[; ;kalman.c: 38: gyState.p =1;
+"38
+[e = . _gyState 3 -> -> 1 `i `f ]
+[; ;kalman.c: 39: gyState.q = .07;
+"39
+[e = . _gyState 0 -> .0.07 `f ]
+[; ;kalman.c: 40: gyState.r = .75;
+"40
+[e = . _gyState 1 -> .0.75 `f ]
+[; ;kalman.c: 42: gzState.x = gz;
+"42
+[e = . _gzState 2 _gz ]
+[; ;kalman.c: 43: gzState.p = 1;
+"43
+[e = . _gzState 3 -> -> 1 `i `f ]
+[; ;kalman.c: 44: gzState.q = .07;
+"44
+[e = . _gzState 0 -> .0.07 `f ]
+[; ;kalman.c: 45: gzState.r = .75;
+"45
+[e = . _gzState 1 -> .0.75 `f ]
+[; ;kalman.c: 47: }
+"47
+[e :UE 2 ]
+}
+"49
+[v _kalmanUpdate `(v ~T0 @X0 1 ef2`*S1`f ]
+{
+[; ;kalman.c: 49: void kalmanUpdate( kalman_state* state, float measurement ) {
+[e :U _kalmanUpdate ]
+[v _state `*S1 ~T0 @X0 1 r1 ]
+[v _measurement `f ~T0 @X0 1 r2 ]
+[f ]
+[; ;kalman.c: 52: state->p = state->p + state->q;
+"52
+[e = . *U _state 3 + . *U _state 3 . *U _state 0 ]
+[; ;kalman.c: 55: state->k = state->p / (state->p + state->r);
+"55
+[e = . *U _state 4 / . *U _state 3 + . *U _state 3 . *U _state 1 ]
+[; ;kalman.c: 56: state->x = state->x + state->k * (measurement - state->x);
+"56
+[e = . *U _state 2 + . *U _state 2 * . *U _state 4 - _measurement . *U _state 2 ]
+[; ;kalman.c: 57: state->p = (1 - state->k) * state->p;
+"57
+[e = . *U _state 3 * - -> -> 1 `i `f . *U _state 4 . *U _state 3 ]
+[; ;kalman.c: 58: }
+"58
+[e :UE 3 ]
+}
+"60
+[v _filterData `(v ~T0 @X0 1 ef ]
+{
+[; ;kalman.c: 60: void filterData( void ) {
+[e :U _filterData ]
+[f ]
+[; ;kalman.c: 61: kalmanUpdate(&axState, ax);
+"61
+[e ( _kalmanUpdate (2 , &U _axState _ax ]
+[; ;kalman.c: 62: kalmanUpdate(&ayState, ay);
+"62
+[e ( _kalmanUpdate (2 , &U _ayState _ay ]
+[; ;kalman.c: 63: kalmanUpdate(&azState, az);
+"63
+[e ( _kalmanUpdate (2 , &U _azState _az ]
+[; ;kalman.c: 64: kalmanUpdate(&gxState, gx);
+"64
+[e ( _kalmanUpdate (2 , &U _gxState _gx ]
+[; ;kalman.c: 65: kalmanUpdate(&gyState, gy);
+"65
+[e ( _kalmanUpdate (2 , &U _gyState _gy ]
+[; ;kalman.c: 66: kalmanUpdate(&gzState, gz);
+"66
+[e ( _kalmanUpdate (2 , &U _gzState _gz ]
+[; ;kalman.c: 68: ax = axState.x;
+"68
+[e = _ax . _axState 2 ]
+[; ;kalman.c: 69: ay = ayState.x;
+"69
+[e = _ay . _ayState 2 ]
+[; ;kalman.c: 70: az = azState.x;
+"70
+[e = _az . _azState 2 ]
+[; ;kalman.c: 71: gx = gxState.x;
+"71
+[e = _gx . _gxState 2 ]
+[; ;kalman.c: 72: gy = gyState.x;
+"72
+[e = _gy . _gyState 2 ]
+[; ;kalman.c: 73: gz = gzState.x;
+"73
+[e = _gz . _gzState 2 ]
+[; ;kalman.c: 74: }
+"74
+[e :UE 4 ]
+}

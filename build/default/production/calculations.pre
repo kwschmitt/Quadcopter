@@ -1,0 +1,448 @@
+
+# 1 "calculations.c"
+
+# 4 "C:\Program Files (x86)\Microchip\xc8\v1.42\include\__size_t.h"
+typedef unsigned size_t;
+
+# 7 "C:\Program Files (x86)\Microchip\xc8\v1.42\include\stdarg.h"
+typedef void * va_list[1];
+
+#pragma intrinsic(__va_start)
+extern void * __va_start(void);
+
+#pragma intrinsic(__va_arg)
+extern void * __va_arg(void *, ...);
+
+# 43 "C:\Program Files (x86)\Microchip\xc8\v1.42\include\stdio.h"
+struct __prbuf
+{
+char * ptr;
+void (* func)(char);
+};
+
+# 29 "C:\Program Files (x86)\Microchip\xc8\v1.42\include\errno.h"
+extern int errno;
+
+# 12 "C:\Program Files (x86)\Microchip\xc8\v1.42\include\conio.h"
+extern void init_uart(void);
+
+extern char getch(void);
+extern char getche(void);
+extern void putch(char);
+extern void ungetch(char);
+
+extern __bit kbhit(void);
+
+# 23
+extern char * cgets(char *);
+extern void cputs(const char *);
+
+# 88 "C:\Program Files (x86)\Microchip\xc8\v1.42\include\stdio.h"
+extern int cprintf(char *, ...);
+#pragma printf_check(cprintf)
+
+
+
+extern int _doprnt(struct __prbuf *, const register char *, register va_list);
+
+
+# 180
+#pragma printf_check(vprintf) const
+#pragma printf_check(vsprintf) const
+
+extern char * gets(char *);
+extern int puts(const char *);
+extern int scanf(const char *, ...) __attribute__((unsupported("scanf() is not supported by this compiler")));
+extern int sscanf(const char *, const char *, ...) __attribute__((unsupported("sscanf() is not supported by this compiler")));
+extern int vprintf(const char *, va_list) __attribute__((unsupported("vprintf() is not supported by this compiler")));
+extern int vsprintf(char *, const char *, va_list) __attribute__((unsupported("vsprintf() is not supported by this compiler")));
+extern int vscanf(const char *, va_list ap) __attribute__((unsupported("vscanf() is not supported by this compiler")));
+extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
+
+#pragma printf_check(printf) const
+#pragma printf_check(sprintf) const
+extern int sprintf(char *, const char *, ...);
+extern int printf(const char *, ...);
+
+# 30 "C:\Program Files (x86)\Microchip\xc8\v1.42\include\math.h"
+extern double fabs(double);
+extern double floor(double);
+extern double ceil(double);
+extern double modf(double, double *);
+extern double sqrt(double);
+extern double atof(const char *);
+extern double sin(double) ;
+extern double cos(double) ;
+extern double tan(double) ;
+extern double asin(double) ;
+extern double acos(double) ;
+extern double atan(double);
+extern double atan2(double, double) ;
+extern double log(double);
+extern double log10(double);
+extern double pow(double, double) ;
+extern double exp(double) ;
+extern double sinh(double) ;
+extern double cosh(double) ;
+extern double tanh(double);
+extern double eval_poly(double, const double *, int);
+extern double frexp(double, int *);
+extern double ldexp(double, int);
+extern double fmod(double, double);
+extern double trunc(double);
+extern double round(double);
+
+# 20 "calculations.h"
+float roll = 0;
+float pitch = 0;
+float yaw = 0;
+
+
+void computeRollPitch(void);
+
+float fastatan2( float x, float y );
+float maximum( float x, float y );
+float minimum( float x, float y );
+
+# 20 "sensors.h"
+float ax;
+float ay;
+float az;
+
+float gx;
+float gy;
+float gz;
+
+
+void sensors_Init(void);
+void accel_Init(void);
+void gyro_Init(void);
+void readSensors(void);
+void readAccel(void);
+void readGyro(void);
+
+# 13 "C:\Program Files (x86)\Microchip\xc8\v1.42\include\stdint.h"
+typedef signed char int8_t;
+
+# 20
+typedef signed int int16_t;
+
+# 38
+typedef signed long int int32_t;
+
+# 45
+typedef unsigned char uint8_t;
+
+# 51
+typedef unsigned int uint16_t;
+
+# 67
+typedef unsigned long int uint32_t;
+
+# 75
+typedef signed char int_least8_t;
+
+# 82
+typedef signed int int_least16_t;
+
+# 104
+typedef signed long int int_least32_t;
+
+# 111
+typedef unsigned char uint_least8_t;
+
+# 117
+typedef unsigned int uint_least16_t;
+
+# 136
+typedef unsigned long int uint_least32_t;
+
+# 145
+typedef signed char int_fast8_t;
+
+# 152
+typedef signed int int_fast16_t;
+
+# 174
+typedef signed long int int_fast32_t;
+
+# 181
+typedef unsigned char uint_fast8_t;
+
+# 187
+typedef unsigned int uint_fast16_t;
+
+# 206
+typedef unsigned long int uint_fast32_t;
+
+# 212
+typedef int32_t intmax_t;
+
+
+
+
+typedef uint32_t uintmax_t;
+
+
+
+
+typedef int16_t intptr_t;
+
+
+
+
+typedef uint16_t uintptr_t;
+
+# 12 "C:\Program Files (x86)\Microchip\xc8\v1.42\include\stdbool.h"
+typedef unsigned char bool;
+
+# 99 "mcc_generated_files/tmr0.h"
+void TMR0_Initialize(void);
+
+# 128
+void TMR0_StartTimer(void);
+
+# 160
+void TMR0_StopTimer(void);
+
+# 196
+uint16_t TMR0_Read16bitTimer(void);
+
+# 235
+void TMR0_Write16bitTimer(uint16_t timerVal);
+
+# 271
+void TMR0_Reload16bit(void);
+
+# 309
+bool TMR0_HasOverflowOccured(void);
+
+# 62 "mcc_generated_files/tmr2.h"
+int beginCounter = 0;
+uint8_t begin = 0;
+uint8_t accCounter = 0;
+
+# 82
+typedef enum
+{
+
+# 92
+TMR2_ROP_STARTS_TMRON,
+
+# 97
+TMR2_ROP_STARTS_TMRON_ERSHIGH,
+
+# 102
+TMR2_ROP_STARTS_TMRON_ERSLOW,
+
+# 107
+TMR2_ROP_RESETS_ERSBOTHEDGE,
+
+# 112
+TMR2_ROP_RESETS_ERSRISINGEDGE,
+
+# 117
+TMR2_ROP_RESETS_ERSFALLINGEDGE,
+
+# 122
+TMR2_ROP_RESETS_ERSLOW,
+
+# 127
+TMR2_ROP_RESETS_ERSHIGH,
+
+# 138
+TMR2_OS_STARTS_TMRON,
+
+# 143
+TMR2_OS_STARTS_ERSRISINGEDGE ,
+
+# 148
+TMR2_OS_STARTS_ERSFALLINGEDGE ,
+
+# 153
+TMR2_OS_STARTS_ERSBOTHEDGE,
+
+# 159
+TMR2_OS_STARTS_ERSFIRSTRISINGEDGE,
+
+# 165
+TMR2_OS_STARTS_ERSFIRSTFALLINGEDGE,
+
+# 171
+TMR2_OS_STARTS_ERSRISINGEDGEDETECT,
+
+# 176
+TMR2_OS_STARTS_ERSFALLINGEDGEDETECT,
+
+# 181
+TMR2_OS_STARTS_TMRON_ERSHIGH = 0x16,
+
+# 186
+TMR2_OS_STARTS_TMRON_ERSLOW = 0x17,
+
+# 195
+TMR2_MS_STARTS_TMRON_ERSRISINGEDGEDETECT = 0x11,
+
+# 200
+TMR2_MS_STARTS_TMRON_ERSFALLINGEDGEDETECT = 0x12,
+
+# 206
+TMR2_MS_STARTS_TMRON_ERSBOTHEDGE = 0x13
+
+} TMR2_HLT_MODE;
+
+# 223
+typedef enum
+{
+
+# 227
+TMR2_T2INPPS,
+
+# 231
+TMR2_RESERVED,
+
+# 235
+TMR2_T4POSTSCALED,
+
+# 239
+TMR2_T6POSTSCALED,
+
+# 242
+TMR2_CCP1_OUT,
+
+# 246
+TMR2_CCP2_OUT,
+
+# 250
+TMR2_PWM3_OUT,
+
+# 254
+TMR2_PWM4_OUT,
+
+# 258
+TMR2_C1_OUT_SYNC,
+
+# 262
+TMR2_C2_OUT_SYNC,
+
+# 266
+TMR2_ZCD_OUTPUT
+
+} TMR2_HLT_EXT_RESET_SOURCE;
+
+# 310
+void TMR2_Initialize(void);
+
+# 346
+void TMR2_ModeSet(TMR2_HLT_MODE mode);
+
+# 381
+void TMR2_ExtResetSourceSet(TMR2_HLT_EXT_RESET_SOURCE reset);
+
+# 410
+void TMR2_Start(void);
+
+# 439
+void TMR2_StartTimer(void);
+
+# 471
+void TMR2_Stop(void);
+
+# 503
+void TMR2_StopTimer(void);
+
+# 538
+uint8_t TMR2_Counter8BitGet(void);
+
+# 573
+uint8_t TMR2_ReadTimer(void);
+
+# 612
+void TMR2_Counter8BitSet(uint8_t timerVal);
+
+# 651
+void TMR2_WriteTimer(uint8_t timerVal);
+
+# 703
+void TMR2_Period8BitSet(uint8_t periodVal);
+
+# 755
+void TMR2_LoadPeriodRegister(uint8_t periodVal);
+
+# 773
+void TMR2_ISR(void);
+
+# 791
+void TMR2_SetInterruptHandler(void (* InterruptHandler)(void));
+
+# 809
+extern void (*TMR2_InterruptHandler)(void);
+
+# 827
+void TMR2_DefaultInterruptHandler(void);
+
+# 10 "calculations.c"
+float rollAcc = 0;
+float pitchAcc = 0;
+
+
+void computeRollPitch() {
+
+TMR0_StopTimer();
+uint16_t tmr0val = TMR0_Read16bitTimer();
+float dt = ((float)tmr0val) * .0000001666667;
+
+
+rollAcc = rollAcc * (.8) + fastatan2(-ay, az)*(1-.8);
+roll -= (gx*.0175) * dt;
+
+if (accCounter >= 20) {
+accCounter = 0;
+roll = roll*.985 + rollAcc*(1-.985);
+}
+
+
+TMR0_Write16bitTimer(0);
+TMR0_StartTimer();
+}
+
+float fastatan2( float x, float y ) {
+float a;
+float s;
+float r;
+
+a = minimum( fabs(x), fabs(y) ) / maximum( fabs(x), fabs(y) );
+s = a*a;
+r = ((-0.0464964749 * s + 0.15931422) * s - 0.327622764) * s * a + a;
+
+if ( fabs(y) > fabs(x) ) {
+r = 1.57079637 - r;
+}
+if ( x < 0 ) {
+r = 3.14159274 - r;
+}
+if ( y < 0 ) {
+r = -r;
+}
+
+r = (r * 180.0)/3.14159;
+r = -r + 90;
+
+return r;
+}
+
+float maximum( float x, float y ) {
+if ( x > y ) {
+return x;
+} else {
+return y;
+}
+}
+
+float minimum( float x, float y ) {
+if ( x < y ) {
+return x;
+} else {
+return y;
+}
+}

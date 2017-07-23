@@ -1,0 +1,207 @@
+
+# 1 "pid.c"
+
+# 16 "pid.h"
+float rollkp;
+float rollki;
+float rollkd;
+int rollAdj;
+float rollPreviousError;
+float rollIntegral;
+
+float pitchkp;
+float pitchki;
+float pitchkd;
+int pitchAdj;
+float pitchPreviousError;
+float pitchIntegral;
+
+float yawkp;
+float yawki;
+float yawkd;
+int yawAdj;
+float yawPreviousError;
+float yawIntegral;
+
+int throttle1 = 0;
+int throttle2 = 0;
+int throttle3 = 0;
+int throttle4 = 0;
+
+
+void pid_Init();
+void pid( float desiredRoll, float desiredPitch, float desiredYaw );
+void rollPid( float desiredRoll );
+void pitchPid( float desiredPitch );
+void yawPid( float desiredYaw );
+
+# 20 "calculations.h"
+float roll = 0;
+float pitch = 0;
+float yaw = 0;
+
+
+void computeRollPitch(void);
+
+float fastatan2( float x, float y );
+float maximum( float x, float y );
+float minimum( float x, float y );
+
+# 20 "sensors.h"
+float ax;
+float ay;
+float az;
+
+float gx;
+float gy;
+float gz;
+
+
+void sensors_Init(void);
+void accel_Init(void);
+void gyro_Init(void);
+void readSensors(void);
+void readAccel(void);
+void readGyro(void);
+
+# 4 "C:\Program Files (x86)\Microchip\xc8\v1.42\include\__size_t.h"
+typedef unsigned size_t;
+
+# 7 "C:\Program Files (x86)\Microchip\xc8\v1.42\include\stdarg.h"
+typedef void * va_list[1];
+
+#pragma intrinsic(__va_start)
+extern void * __va_start(void);
+
+#pragma intrinsic(__va_arg)
+extern void * __va_arg(void *, ...);
+
+# 43 "C:\Program Files (x86)\Microchip\xc8\v1.42\include\stdio.h"
+struct __prbuf
+{
+char * ptr;
+void (* func)(char);
+};
+
+# 29 "C:\Program Files (x86)\Microchip\xc8\v1.42\include\errno.h"
+extern int errno;
+
+# 12 "C:\Program Files (x86)\Microchip\xc8\v1.42\include\conio.h"
+extern void init_uart(void);
+
+extern char getch(void);
+extern char getche(void);
+extern void putch(char);
+extern void ungetch(char);
+
+extern __bit kbhit(void);
+
+# 23
+extern char * cgets(char *);
+extern void cputs(const char *);
+
+# 88 "C:\Program Files (x86)\Microchip\xc8\v1.42\include\stdio.h"
+extern int cprintf(char *, ...);
+#pragma printf_check(cprintf)
+
+
+
+extern int _doprnt(struct __prbuf *, const register char *, register va_list);
+
+
+# 180
+#pragma printf_check(vprintf) const
+#pragma printf_check(vsprintf) const
+
+extern char * gets(char *);
+extern int puts(const char *);
+extern int scanf(const char *, ...) __attribute__((unsupported("scanf() is not supported by this compiler")));
+extern int sscanf(const char *, const char *, ...) __attribute__((unsupported("sscanf() is not supported by this compiler")));
+extern int vprintf(const char *, va_list) __attribute__((unsupported("vprintf() is not supported by this compiler")));
+extern int vsprintf(char *, const char *, va_list) __attribute__((unsupported("vsprintf() is not supported by this compiler")));
+extern int vscanf(const char *, va_list ap) __attribute__((unsupported("vscanf() is not supported by this compiler")));
+extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
+
+#pragma printf_check(printf) const
+#pragma printf_check(sprintf) const
+extern int sprintf(char *, const char *, ...);
+extern int printf(const char *, ...);
+
+# 8 "pid.c"
+void pid_Init() {
+rollkp = 0;
+rollki = 0;
+rollkd = 0;
+rollPreviousError = 0;
+rollIntegral = 0;
+
+pitchkp = 0;
+pitchki = 0;
+pitchkd = 0;
+pitchPreviousError = 0;
+pitchIntegral = 0;
+
+yawkp = 0;
+yawki = 0;
+yawkd = 0;
+yawPreviousError = 0;
+yawIntegral = 0;
+}
+
+void pid( float desiredRoll, float desiredPitch, float desiredYaw ) {
+
+rollPid( desiredRoll );
+pitchPid( desiredPitch );
+yawPid( desiredYaw );
+
+
+extern int throttle;
+throttle1 = throttle - rollAdj;
+throttle2 = throttle + rollAdj;
+throttle3 = throttle + rollAdj;
+throttle4 = throttle - rollAdj;
+
+
+if ( throttle1 < 0 ) {
+throttle1 = 0;
+throttle4 = 0;
+}
+if ( throttle1 > 300 ) {
+throttle1 = 300;
+throttle4 = 300;
+}
+
+if ( throttle2 < 0 ) {
+throttle2 = 0;
+throttle3 = 0;
+}
+if ( throttle2 > 300 ) {
+throttle2 = 300;
+throttle3 = 300;
+}
+}
+
+void rollPid( float desiredRoll ) {
+
+float rollError;
+float changeInError;
+
+
+rollError = desiredRoll - roll;
+changeInError = rollPreviousError - rollError;
+rollIntegral += rollError;
+
+
+rollAdj = (int)((rollkp*rollError) - (rollkd*changeInError) + (rollki * rollIntegral));
+
+
+rollPreviousError = rollError;
+}
+
+void pitchPid( float desiredPitch ) {
+
+}
+
+void yawPid( float desiredYaw ) {
+
+}

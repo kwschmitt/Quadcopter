@@ -1,0 +1,105 @@
+
+# 1 "kalman.c"
+
+# 16 "kalman.h"
+typedef struct {
+float q;
+float r;
+float x;
+float p;
+float k;
+} kalman_state;
+
+
+void kalman_Init(void);
+void kalmanUpdate(kalman_state* state, float measurement);
+void filterData(void);
+
+# 20 "sensors.h"
+float ax;
+float ay;
+float az;
+
+float gx;
+float gy;
+float gz;
+
+
+void sensors_Init(void);
+void accel_Init(void);
+void gyro_Init(void);
+void readSensors(void);
+void readAccel(void);
+void readGyro(void);
+
+# 5 "kalman.c"
+kalman_state axState;
+kalman_state ayState;
+kalman_state azState;
+kalman_state gxState;
+kalman_state gyState;
+kalman_state gzState;
+
+
+void kalman_Init() {
+
+
+axState.x = ax;
+axState.p = 1;
+axState.q = .001;
+axState.r = .3;
+
+ayState.x = ay;
+ayState.p = 1;
+ayState.q = .001;
+ayState.r = .3;
+
+azState.x = az;
+azState.p =1;
+azState.q = .015;
+azState.r = .3;
+
+
+gxState.x = gx;
+gxState.p = 1;
+gxState.q = .07;
+gxState.r = .75;
+
+gyState.x = gy;
+gyState.p =1;
+gyState.q = .07;
+gyState.r = .75;
+
+gzState.x = gz;
+gzState.p = 1;
+gzState.q = .07;
+gzState.r = .75;
+
+}
+
+void kalmanUpdate( kalman_state* state, float measurement ) {
+
+
+state->p = state->p + state->q;
+
+
+state->k = state->p / (state->p + state->r);
+state->x = state->x + state->k * (measurement - state->x);
+state->p = (1 - state->k) * state->p;
+}
+
+void filterData( void ) {
+kalmanUpdate(&axState, ax);
+kalmanUpdate(&ayState, ay);
+kalmanUpdate(&azState, az);
+kalmanUpdate(&gxState, gx);
+kalmanUpdate(&gyState, gy);
+kalmanUpdate(&gzState, gz);
+
+ax = axState.x;
+ay = ayState.x;
+az = azState.x;
+gx = gxState.x;
+gy = gyState.x;
+gz = gzState.x;
+}

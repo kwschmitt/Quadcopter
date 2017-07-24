@@ -14489,7 +14489,11 @@ void kalman_Init(void);
 void kalmanUpdate(kalman_state* state, float measurement);
 void filterData(void);
 
-# 20 "calculations.h"
+# 16 "calculations.h"
+float accelAlpha = .8;
+float gyroAlpha = .995;
+
+
 float roll = 0;
 float pitch = 0;
 float yaw = 0;
@@ -14942,12 +14946,15 @@ unlockI2C();
 SYSTEM_Initialize();
 interrupt_Init();
 sensors_Init();
-kalman_Init();
 pid_Init();
-TRISBbits.TRISB4 = 0;
+kalman_Init();
 
 
+accelAlpha = 0;
+gyroAlpha = 0;
 while ( !begin ) {readSensors(); filterData(); computeRollPitch();}
+accelAlpha = .95;
+gyroAlpha = .995;
 
 
 while (1)
@@ -14967,27 +14974,22 @@ case 'w':rollkd+=.05; break;
 case 's':rollkd-=.05; break;
 case 'e':rollki+=.001; break;
 case 'd':rollki-=.001; break;
-
 case 't':throttle+=2; break;
 case 'g':throttle-=2; break;
-
 case 'z':show^=1; break;
-
 default: break;
 }
 printf( "kp: %.2f   kd: %.2f   ki: %.3f   throttle: %i \n\r", rollkp, rollkd, rollki, throttle );
 }
 if (show) {
 float val = roll*100;
+float val2 = 100;
 EUSART1_Write(0xAA);
-EUSART1_Write(((int)(gx))>>8);
-EUSART1_Write(((int)(gx)));
+EUSART1_Write(((int)(val2))>>8);
+EUSART1_Write(((int)(val2)));
 EUSART1_Write(((int)(val))>>8);
 EUSART1_Write((int)(val));
-
 }
-
-LATBbits.LATB4 ^= 1;
 }
 }
 

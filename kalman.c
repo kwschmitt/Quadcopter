@@ -1,5 +1,6 @@
 #include "kalman.h"
 #include "sensors.h"
+#include "mcc_generated_files/eusart1.h"
 
 /* Private Variables */
 kalman_state axState;
@@ -15,34 +16,34 @@ void kalman_Init() {
     // Acceleration Data
     axState.x = ax;
     axState.p = 1;
-    axState.q = .001;
-    axState.r = .3;
+    axState.q = .1;
+    axState.r = 7.5;
     
     ayState.x = ay;
     ayState.p = 1;
-    ayState.q = .001;
-    ayState.r = .3;
+    ayState.q = .1;
+    ayState.r = 7.5;
     
     azState.x = az;
     azState.p =1;
-    azState.q = .015;
-    azState.r = .3;
+    azState.q = .1;
+    azState.r = 7.5;
     
     // Gyroscope Data
     gxState.x = gx;
     gxState.p = 1;
-    gxState.q = .07;//.015
-    gxState.r = .75;//.75;
+    gxState.q = .75;
+    gxState.r = 5;
     
     gyState.x = gy;
-    gyState.p =1;
-    gyState.q = .07;//.015
-    gyState.r = .75;//.75;
+    gyState.p = 1;
+    gyState.q = .75;
+    gyState.r = 5;
     
     gzState.x = gz;
     gzState.p = 1;
-    gzState.q = .07;//.015
-    gzState.r = .75;//.75;
+    gzState.q = .75;
+    gzState.r = 5;
     
 }
 
@@ -64,11 +65,12 @@ void filterData( void ) {
     kalmanUpdate(&gxState, gx);
     kalmanUpdate(&gyState, gy);
     kalmanUpdate(&gzState, gz);
-    
+
     ax = axState.x;
     ay = ayState.x;
     az = azState.x;
-    gx = gxState.x;
+   
+    gx = gxState.x;    
     gy = gyState.x;
     gz = gzState.x;
 }

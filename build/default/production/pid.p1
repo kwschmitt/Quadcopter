@@ -88,7 +88,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pid.h: 45: void rollPid( float desiredRoll );
 [; ;pid.h: 46: void pitchPid( float desiredPitch );
 [; ;pid.h: 47: void yawPid( float desiredYaw );
-"20 calculations.h
+"16 calculations.h
+[v _accelAlpha `f ~T0 @X0 1 e ]
+[i _accelAlpha
+-> .0.8 `f
+]
+[; ;calculations.h: 16: float accelAlpha = .8;
+"17
+[v _gyroAlpha `f ~T0 @X0 1 e ]
+[i _gyroAlpha
+-> .0.995 `f
+]
+[; ;calculations.h: 17: float gyroAlpha = .995;
+"20
 [v _roll `f ~T0 @X0 1 e ]
 [i _roll
 -> -> 0 `i `f

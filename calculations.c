@@ -17,18 +17,21 @@ void computeRollPitch() {
     uint16_t tmr0val = TMR0_Read16bitTimer();
     float dt = ((float)tmr0val) * .0000001666667;
     
-    // Calculate the roll from the accelerometer and gyro
-    rollAcc = rollAcc * (accelAlpha) + fastatan2(-ay, az)*(1-accelAlpha);    
-    roll -= (gx*.0175) * dt;
-
-    if (accCounter >= 20) {
-        accCounter = 0;
-        roll = roll*gyroAlpha + rollAcc*(1-gyroAlpha);
-    }
-    
     // Reset the timer
     TMR0_Write16bitTimer(0);
     TMR0_StartTimer();
+    
+    // Calculate the roll from the accelerometer and gyro
+    rollAcc = rollAcc * (accelAlpha) + fastatan2(-ay, az)*(1-accelAlpha);
+    roll -= (gx*.0175) * dt;
+    
+    // THIS CALCULATION IS WRONG. PLACE HOLDER
+    pitchAcc = atan2(-ay, az)*(1-accelAlpha);
+
+    if (accCounter >= 10) {
+        accCounter = 0;
+        roll = roll*gyroAlpha + rollAcc*(1-gyroAlpha);
+    }
 }
 
 float fastatan2( float x, float y ) {

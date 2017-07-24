@@ -35,7 +35,11 @@ void rollPid( float desiredRoll );
 void pitchPid( float desiredPitch );
 void yawPid( float desiredYaw );
 
-# 20 "calculations.h"
+# 16 "calculations.h"
+float accelAlpha = .8;
+float gyroAlpha = .995;
+
+
 float roll = 0;
 float pitch = 0;
 float yaw = 0;

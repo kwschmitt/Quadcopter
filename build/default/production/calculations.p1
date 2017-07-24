@@ -3,12 +3,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TMR0_StopTimer `(v ~T0 @X0 0 ef ]
 "196
 [v _TMR0_Read16bitTimer `(ui ~T0 @X0 0 ef ]
-"27 calculations.h
-[v _fastatan2 `(f ~T0 @X0 0 ef2`f`f ]
-"235 mcc_generated_files/tmr0.h
+"235
 [v _TMR0_Write16bitTimer `(v ~T0 @X0 0 ef1`ui ]
 "128
 [v _TMR0_StartTimer `(v ~T0 @X0 0 ef ]
+"27 calculations.h
+[v _fastatan2 `(f ~T0 @X0 0 ef2`f`f ]
+"42 C:\Program Files (x86)\Microchip\xc8\v1.42\include\math.h
+[v _atan2 `(d ~T0 @X0 0 ef2`d`d ]
 "29 calculations.h
 [v _minimum `(f ~T0 @X0 0 ef2`f`f ]
 "30 C:\Program Files (x86)\Microchip\xc8\v1.42\include\math.h
@@ -71,7 +73,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;math.h: 53: extern double fmod(double, double);
 [; ;math.h: 54: extern double trunc(double);
 [; ;math.h: 55: extern double round(double);
-"20 calculations.h
+"16 calculations.h
+[v _accelAlpha `f ~T0 @X0 1 e ]
+[i _accelAlpha
+-> .0.8 `f
+]
+[; ;calculations.h: 16: float accelAlpha = .8;
+"17
+[v _gyroAlpha `f ~T0 @X0 1 e ]
+[i _gyroAlpha
+-> .0.995 `f
+]
+[; ;calculations.h: 17: float gyroAlpha = .995;
+"20
 [v _roll `f ~T0 @X0 1 e ]
 [i _roll
 -> -> 0 `i `f
@@ -249,174 +263,177 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _dt `f ~T0 @X0 1 a ]
 [; ;calculations.c: 18: float dt = ((float)tmr0val) * .0000001666667;
 [e = _dt -> * -> -> _tmr0val `f `d .0.0000001666667 `f ]
-[; ;calculations.c: 21: rollAcc = rollAcc * (.8) + fastatan2(-ay, az)*(1-.8);
+[; ;calculations.c: 21: TMR0_Write16bitTimer(0);
 "21
-[e = _rollAcc -> + * -> _rollAcc `d .0.8 * -> ( _fastatan2 (2 , -U _ay _az `d - -> -> 1 `i `d .0.8 `f ]
-[; ;calculations.c: 22: roll -= (gx*.0175) * dt;
+[e ( _TMR0_Write16bitTimer (1 -> -> 0 `i `ui ]
+[; ;calculations.c: 22: TMR0_StartTimer();
 "22
-[e =- _roll -> * * -> _gx `d .0.0175 -> _dt `d `f ]
-[; ;calculations.c: 24: if (accCounter >= 20) {
-"24
-[e $ ! >= -> _accCounter `i -> 20 `i 3  ]
-{
-[; ;calculations.c: 25: accCounter = 0;
+[e ( _TMR0_StartTimer ..  ]
+[; ;calculations.c: 25: rollAcc = rollAcc * (accelAlpha) + fastatan2(-ay, az)*(1-accelAlpha);
 "25
-[e = _accCounter -> -> 0 `i `uc ]
-[; ;calculations.c: 26: roll = roll*.985 + rollAcc*(1-.985);
+[e = _rollAcc + * _rollAcc _accelAlpha * ( _fastatan2 (2 , -U _ay _az - -> -> 1 `i `f _accelAlpha ]
+[; ;calculations.c: 26: roll -= (gx*.0175) * dt;
 "26
-[e = _roll -> + * -> _roll `d .0.985 * -> _rollAcc `d - -> -> 1 `i `d .0.985 `f ]
-"27
+[e =- _roll -> * * -> _gx `d .0.0175 -> _dt `d `f ]
+[; ;calculations.c: 29: pitchAcc = atan2(-ay, az)*(1-accelAlpha);
+"29
+[e = _pitchAcc -> * ( _atan2 (2 , -> -U _ay `d -> _az `d -> - -> -> 1 `i `f _accelAlpha `d `f ]
+[; ;calculations.c: 31: if (accCounter >= 10) {
+"31
+[e $ ! >= -> _accCounter `i -> 10 `i 3  ]
+{
+[; ;calculations.c: 32: accCounter = 0;
+"32
+[e = _accCounter -> -> 0 `i `uc ]
+[; ;calculations.c: 33: roll = roll*gyroAlpha + rollAcc*(1-gyroAlpha);
+"33
+[e = _roll + * _roll _gyroAlpha * _rollAcc - -> -> 1 `i `f _gyroAlpha ]
+"34
 }
 [e :U 3 ]
-[; ;calculations.c: 27: }
-[; ;calculations.c: 30: TMR0_Write16bitTimer(0);
-"30
-[e ( _TMR0_Write16bitTimer (1 -> -> 0 `i `ui ]
-[; ;calculations.c: 31: TMR0_StartTimer();
-"31
-[e ( _TMR0_StartTimer ..  ]
-[; ;calculations.c: 32: }
-"32
+[; ;calculations.c: 34: }
+[; ;calculations.c: 35: }
+"35
 [e :UE 2 ]
 }
-"34
+"37
 [v _fastatan2 `(f ~T0 @X0 1 ef2`f`f ]
 {
-[; ;calculations.c: 34: float fastatan2( float x, float y ) {
+[; ;calculations.c: 37: float fastatan2( float x, float y ) {
 [e :U _fastatan2 ]
 [v _x `f ~T0 @X0 1 r1 ]
 [v _y `f ~T0 @X0 1 r2 ]
 [f ]
-"35
+"38
 [v _a `f ~T0 @X0 1 a ]
-"36
-[v _s `f ~T0 @X0 1 a ]
-"37
-[v _r `f ~T0 @X0 1 a ]
-[; ;calculations.c: 35: float a;
-[; ;calculations.c: 36: float s;
-[; ;calculations.c: 37: float r;
-[; ;calculations.c: 39: a = minimum( fabs(x), fabs(y) ) / maximum( fabs(x), fabs(y) );
 "39
-[e = _a / ( _minimum (2 , -> ( _fabs (1 -> _x `d `f -> ( _fabs (1 -> _y `d `f ( _maximum (2 , -> ( _fabs (1 -> _x `d `f -> ( _fabs (1 -> _y `d `f ]
-[; ;calculations.c: 40: s = a*a;
+[v _s `f ~T0 @X0 1 a ]
 "40
-[e = _s * _a _a ]
-[; ;calculations.c: 41: r = ((-0.0464964749 * s + 0.15931422) * s - 0.327622764) * s * a + a;
-"41
-[e = _r -> + * * - * + * -U .0.0464964749 -> _s `d .0.15931422 -> _s `d .0.327622764 -> _s `d -> _a `d -> _a `d `f ]
-[; ;calculations.c: 43: if ( fabs(y) > fabs(x) ) {
+[v _r `f ~T0 @X0 1 a ]
+[; ;calculations.c: 38: float a;
+[; ;calculations.c: 39: float s;
+[; ;calculations.c: 40: float r;
+[; ;calculations.c: 42: a = minimum( fabs(x), fabs(y) ) / maximum( fabs(x), fabs(y) );
+"42
+[e = _a / ( _minimum (2 , -> ( _fabs (1 -> _x `d `f -> ( _fabs (1 -> _y `d `f ( _maximum (2 , -> ( _fabs (1 -> _x `d `f -> ( _fabs (1 -> _y `d `f ]
+[; ;calculations.c: 43: s = a*a;
 "43
+[e = _s * _a _a ]
+[; ;calculations.c: 44: r = ((-0.0464964749 * s + 0.15931422) * s - 0.327622764) * s * a + a;
+"44
+[e = _r -> + * * - * + * -U .0.0464964749 -> _s `d .0.15931422 -> _s `d .0.327622764 -> _s `d -> _a `d -> _a `d `f ]
+[; ;calculations.c: 46: if ( fabs(y) > fabs(x) ) {
+"46
 [e $ ! > ( _fabs (1 -> _y `d ( _fabs (1 -> _x `d 5  ]
 {
-[; ;calculations.c: 44: r = 1.57079637 - r;
-"44
-[e = _r -> - .1.57079637 -> _r `d `f ]
-"45
-}
-[e :U 5 ]
-[; ;calculations.c: 45: }
-[; ;calculations.c: 46: if ( x < 0 ) {
-"46
-[e $ ! < _x -> -> 0 `i `f 6  ]
-{
-[; ;calculations.c: 47: r = 3.14159274 - r;
+[; ;calculations.c: 47: r = 1.57079637 - r;
 "47
-[e = _r -> - .3.14159274 -> _r `d `f ]
+[e = _r -> - .1.57079637 -> _r `d `f ]
 "48
 }
-[e :U 6 ]
+[e :U 5 ]
 [; ;calculations.c: 48: }
-[; ;calculations.c: 49: if ( y < 0 ) {
+[; ;calculations.c: 49: if ( x < 0 ) {
 "49
-[e $ ! < _y -> -> 0 `i `f 7  ]
+[e $ ! < _x -> -> 0 `i `f 6  ]
 {
-[; ;calculations.c: 50: r = -r;
+[; ;calculations.c: 50: r = 3.14159274 - r;
 "50
-[e = _r -U _r ]
+[e = _r -> - .3.14159274 -> _r `d `f ]
 "51
 }
-[e :U 7 ]
+[e :U 6 ]
 [; ;calculations.c: 51: }
-[; ;calculations.c: 53: r = (r * 180.0)/3.14159;
+[; ;calculations.c: 52: if ( y < 0 ) {
+"52
+[e $ ! < _y -> -> 0 `i `f 7  ]
+{
+[; ;calculations.c: 53: r = -r;
 "53
-[e = _r -> / * -> _r `d .180.0 .3.14159 `f ]
-[; ;calculations.c: 54: r = -r + 90;
+[e = _r -U _r ]
 "54
-[e = _r + -U _r -> -> 90 `i `f ]
-[; ;calculations.c: 56: return r;
+}
+[e :U 7 ]
+[; ;calculations.c: 54: }
+[; ;calculations.c: 56: r = (r * 180.0)/3.14159;
 "56
+[e = _r -> / * -> _r `d .180.0 .3.14159 `f ]
+[; ;calculations.c: 57: r = -r + 90;
+"57
+[e = _r + -U _r -> -> 90 `i `f ]
+[; ;calculations.c: 59: return r;
+"59
 [e ) _r ]
 [e $UE 4  ]
-[; ;calculations.c: 57: }
-"57
+[; ;calculations.c: 60: }
+"60
 [e :UE 4 ]
 }
-"59
+"62
 [v _maximum `(f ~T0 @X0 1 ef2`f`f ]
 {
-[; ;calculations.c: 59: float maximum( float x, float y ) {
+[; ;calculations.c: 62: float maximum( float x, float y ) {
 [e :U _maximum ]
 [v _x `f ~T0 @X0 1 r1 ]
 [v _y `f ~T0 @X0 1 r2 ]
 [f ]
-[; ;calculations.c: 60: if ( x > y ) {
-"60
+[; ;calculations.c: 63: if ( x > y ) {
+"63
 [e $ ! > _x _y 9  ]
 {
-[; ;calculations.c: 61: return x;
-"61
+[; ;calculations.c: 64: return x;
+"64
 [e ) _x ]
 [e $UE 8  ]
-"62
+"65
 }
-[; ;calculations.c: 62: } else {
+[; ;calculations.c: 65: } else {
 [e $U 10  ]
 [e :U 9 ]
 {
-[; ;calculations.c: 63: return y;
-"63
+[; ;calculations.c: 66: return y;
+"66
 [e ) _y ]
 [e $UE 8  ]
-"64
+"67
 }
 [e :U 10 ]
-[; ;calculations.c: 64: }
-[; ;calculations.c: 65: }
-"65
+[; ;calculations.c: 67: }
+[; ;calculations.c: 68: }
+"68
 [e :UE 8 ]
 }
-"67
+"70
 [v _minimum `(f ~T0 @X0 1 ef2`f`f ]
 {
-[; ;calculations.c: 67: float minimum( float x, float y ) {
+[; ;calculations.c: 70: float minimum( float x, float y ) {
 [e :U _minimum ]
 [v _x `f ~T0 @X0 1 r1 ]
 [v _y `f ~T0 @X0 1 r2 ]
 [f ]
-[; ;calculations.c: 68: if ( x < y ) {
-"68
+[; ;calculations.c: 71: if ( x < y ) {
+"71
 [e $ ! < _x _y 12  ]
 {
-[; ;calculations.c: 69: return x;
-"69
+[; ;calculations.c: 72: return x;
+"72
 [e ) _x ]
 [e $UE 11  ]
-"70
+"73
 }
-[; ;calculations.c: 70: } else {
+[; ;calculations.c: 73: } else {
 [e $U 13  ]
 [e :U 12 ]
 {
-[; ;calculations.c: 71: return y;
-"71
+[; ;calculations.c: 74: return y;
+"74
 [e ) _y ]
 [e $UE 11  ]
-"72
+"75
 }
 [e :U 13 ]
-[; ;calculations.c: 72: }
-[; ;calculations.c: 73: }
-"73
+[; ;calculations.c: 75: }
+[; ;calculations.c: 76: }
+"76
 [e :UE 11 ]
 }

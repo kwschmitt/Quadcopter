@@ -13,10 +13,10 @@ extern "C" {
 #endif
     
     /* Constants */
-    #define accelAlpha .8
-    #define gyroAlpha .985
+    float accelAlpha = .8;
+    float gyroAlpha = .995;
 
-    /* Global Variables */
+    /* Global Variables */    
     float roll = 0;
     float pitch = 0;
     float yaw = 0;

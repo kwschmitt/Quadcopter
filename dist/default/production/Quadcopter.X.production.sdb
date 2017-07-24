@@ -66,6 +66,10 @@ S_MASTER_NOACK_STOP 9
 S_MASTER_SEND_ADDR_10BIT_LSB 10
 S_MASTER_10BIT_RESTART 11
 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\atan.c
+[v _atan atan `(d  1 e 3 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\atan2.c
+[v _atan2 atan2 `(d  1 e 3 0 ]
 "8 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\awdiv.c
 [v ___awdiv __awdiv `(i  1 e 2 0 ]
 "8 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\awmod.c
@@ -78,6 +82,8 @@ S_MASTER_10BIT_RESTART 11
 [v _scale scale `(d  1 s 3 scale ]
 "464
 [v _printf printf `(i  1 e 2 0 ]
+"4 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\evalpoly.c
+[v _eval_poly eval_poly `(d  1 e 3 0 ]
 "4 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\fabs.c
 [v _fabs fabs `(d  1 e 3 0 ]
 "60 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\fldivl.c
@@ -124,11 +130,11 @@ S_MASTER_10BIT_RESTART 11
 [v ___lmul __lmul `(ul  1 e 4 0 ]
 "14 C:\Users\Kenny\Dropbox\Quadcopter.X\calculations.c
 [v _computeRollPitch computeRollPitch `(v  1 e 1 0 ]
-"34
+"37
 [v _fastatan2 fastatan2 `(f  1 e 3 0 ]
-"59
+"62
 [v _maximum maximum `(f  1 e 3 0 ]
-"67
+"70
 [v _minimum minimum `(f  1 e 3 0 ]
 "6 C:\Users\Kenny\Dropbox\Quadcopter.X\i2c.c
 [v _checkI2Cbusy checkI2Cbusy `(i  1 e 2 0 ]
@@ -146,17 +152,17 @@ S_MASTER_10BIT_RESTART 11
 [v _writei2cData writei2cData `(v  1 e 1 0 ]
 "56
 [v _readi2cData readi2cData `(v  1 e 1 0 ]
-"13 C:\Users\Kenny\Dropbox\Quadcopter.X\kalman.c
+"14 C:\Users\Kenny\Dropbox\Quadcopter.X\kalman.c
 [v _kalman_Init kalman_Init `(v  1 e 1 0 ]
-"49
+"50
 [v _kalmanUpdate kalmanUpdate `(v  1 e 1 0 ]
-"60
+"61
 [v _filterData filterData `(v  1 e 1 0 ]
 "20 C:\Users\Kenny\Dropbox\Quadcopter.X\main.c
 [v _main main `(v  1 e 1 0 ]
-"81
+"79
 [v _interrupt_Init interrupt_Init `(v  1 e 1 0 ]
-"89
+"87
 [v _unlockI2C unlockI2C `(v  1 e 1 0 ]
 "55 C:\Users\Kenny\Dropbox\Quadcopter.X\mcc_generated_files/eusart1.c
 [v _EUSART1_Initialize EUSART1_Initialize `(v  1 e 1 0 ]
@@ -410,30 +416,9 @@ S_MASTER_10BIT_RESTART 11
 [v _LATA LATA `VEuc  1 e 1 @3971 ]
 "16084
 [v _LATB LATB `VEuc  1 e 1 @3972 ]
-[s S1440 . 1 `uc 1 LATB0 1 0 :1:0 
-`uc 1 LATB1 1 0 :1:1 
-`uc 1 LATB2 1 0 :1:2 
-`uc 1 LATB3 1 0 :1:3 
-`uc 1 LATB4 1 0 :1:4 
-`uc 1 LATB5 1 0 :1:5 
-`uc 1 LATB6 1 0 :1:6 
-`uc 1 LATB7 1 0 :1:7 
-]
-"16111
-[s S1449 . 1 `uc 1 LB0 1 0 :1:0 
-`uc 1 LB1 1 0 :1:1 
-`uc 1 LB2 1 0 :1:2 
-`uc 1 LB3 1 0 :1:3 
-`uc 1 LB4 1 0 :1:4 
-`uc 1 LB5 1 0 :1:5 
-`uc 1 LB6 1 0 :1:6 
-`uc 1 LB7 1 0 :1:7 
-]
-[u S1458 . 1 `S1440 1 . 1 0 `S1449 1 . 1 0 ]
-[v _LATBbits LATBbits `VES1458  1 e 1 @3972 ]
 "16196
 [v _LATC LATC `VEuc  1 e 1 @3973 ]
-[s S1522 . 1 `uc 1 LATC0 1 0 :1:0 
+[s S1461 . 1 `uc 1 LATC0 1 0 :1:0 
 `uc 1 LATC1 1 0 :1:1 
 `uc 1 LATC2 1 0 :1:2 
 `uc 1 LATC3 1 0 :1:3 
@@ -443,7 +428,7 @@ S_MASTER_10BIT_RESTART 11
 `uc 1 LATC7 1 0 :1:7 
 ]
 "16223
-[s S1531 . 1 `uc 1 LC0 1 0 :1:0 
+[s S1470 . 1 `uc 1 LC0 1 0 :1:0 
 `uc 1 LC1 1 0 :1:1 
 `uc 1 LC2 1 0 :1:2 
 `uc 1 LC3 1 0 :1:3 
@@ -452,8 +437,8 @@ S_MASTER_10BIT_RESTART 11
 `uc 1 LC6 1 0 :1:6 
 `uc 1 LC7 1 0 :1:7 
 ]
-[u S1540 . 1 `S1522 1 . 1 0 `S1531 1 . 1 0 ]
-[v _LATCbits LATCbits `VES1540  1 e 1 @3973 ]
+[u S1479 . 1 `S1461 1 . 1 0 `S1470 1 . 1 0 ]
+[v _LATCbits LATCbits `VES1479  1 e 1 @3973 ]
 "16308
 [v _LATD LATD `VEuc  1 e 1 @3974 ]
 "16420
@@ -462,21 +447,9 @@ S_MASTER_10BIT_RESTART 11
 [v _TRISA TRISA `VEuc  1 e 1 @3976 ]
 "16639
 [v _TRISB TRISB `VEuc  1 e 1 @3977 ]
-[s S1375 . 1 `uc 1 TRISB0 1 0 :1:0 
-`uc 1 TRISB1 1 0 :1:1 
-`uc 1 TRISB2 1 0 :1:2 
-`uc 1 TRISB3 1 0 :1:3 
-`uc 1 TRISB4 1 0 :1:4 
-`uc 1 TRISB5 1 0 :1:5 
-`uc 1 TRISB6 1 0 :1:6 
-`uc 1 TRISB7 1 0 :1:7 
-]
-"16661
-[u S1384 . 1 `S1375 1 . 1 0 ]
-[v _TRISBbits TRISBbits `VES1384  1 e 1 @3977 ]
 "16761
 [v _TRISC TRISC `VEuc  1 e 1 @3978 ]
-[s S1501 . 1 `uc 1 TRISC0 1 0 :1:0 
+[s S1440 . 1 `uc 1 TRISC0 1 0 :1:0 
 `uc 1 TRISC1 1 0 :1:1 
 `uc 1 TRISC2 1 0 :1:2 
 `uc 1 TRISC3 1 0 :1:3 
@@ -486,8 +459,8 @@ S_MASTER_10BIT_RESTART 11
 `uc 1 TRISC7 1 0 :1:7 
 ]
 "16783
-[u S1510 . 1 `S1501 1 . 1 0 ]
-[v _TRISCbits TRISCbits `VES1510  1 e 1 @3978 ]
+[u S1449 . 1 `S1440 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES1449  1 e 1 @3978 ]
 "16883
 [v _TRISD TRISD `VEuc  1 e 1 @3979 ]
 "17005
@@ -498,14 +471,14 @@ S_MASTER_10BIT_RESTART 11
 [v _SSP1ADD SSP1ADD `VEuc  1 e 1 @3987 ]
 "17796
 [v _SSP1STAT SSP1STAT `VEuc  1 e 1 @3989 ]
-[s S1756 . 1 `uc 1 . 1 0 :2:0 
+[s S1690 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R_NOT_W 1 0 :1:2 
 ]
 "17945
-[s S1759 . 1 `uc 1 . 1 0 :5:0 
+[s S1693 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 D_NOT_A 1 0 :1:5 
 ]
-[s S1762 . 1 `uc 1 BF 1 0 :1:0 
+[s S1696 . 1 `uc 1 BF 1 0 :1:0 
 `uc 1 UA 1 0 :1:1 
 `uc 1 R_nW 1 0 :1:2 
 `uc 1 S 1 0 :1:3 
@@ -514,39 +487,39 @@ S_MASTER_10BIT_RESTART 11
 `uc 1 CKE 1 0 :1:6 
 `uc 1 SMP 1 0 :1:7 
 ]
-[s S1771 . 1 `uc 1 . 1 0 :2:0 
+[s S1705 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R_W 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 D_A 1 0 :1:5 
 ]
-[s S1776 . 1 `uc 1 . 1 0 :2:0 
+[s S1710 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 nW 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 nA 1 0 :1:5 
 ]
-[s S1781 . 1 `uc 1 . 1 0 :2:0 
+[s S1715 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 NOT_WRITE 1 0 :1:2 
 ]
-[s S1784 . 1 `uc 1 . 1 0 :5:0 
+[s S1718 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 NOT_ADDRESS 1 0 :1:5 
 ]
-[s S1787 . 1 `uc 1 . 1 0 :2:0 
+[s S1721 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 nWRITE 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 nADDRESS 1 0 :1:5 
 ]
-[s S1792 . 1 `uc 1 . 1 0 :2:0 
+[s S1726 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 READ_WRITE 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 DATA_ADDRESS 1 0 :1:5 
 ]
-[s S1797 . 1 `uc 1 . 1 0 :2:0 
+[s S1731 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 I2C_READ 1 0 :1:2 
 `uc 1 I2C_START 1 0 :1:3 
 `uc 1 I2C_STOP 1 0 :1:4 
 `uc 1 I2C_DAT 1 0 :1:5 
 ]
-[s S1803 . 1 `uc 1 BF1 1 0 :1:0 
+[s S1737 . 1 `uc 1 BF1 1 0 :1:0 
 `uc 1 UA1 1 0 :1:1 
 `uc 1 R 1 0 :1:2 
 `uc 1 START 1 0 :1:3 
@@ -555,69 +528,69 @@ S_MASTER_10BIT_RESTART 11
 `uc 1 CKE1 1 0 :1:6 
 `uc 1 SMP1 1 0 :1:7 
 ]
-[s S1812 . 1 `uc 1 . 1 0 :2:0 
+[s S1746 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 RW 1 0 :1:2 
 `uc 1 START1 1 0 :1:3 
 `uc 1 STOP1 1 0 :1:4 
 `uc 1 DA 1 0 :1:5 
 ]
-[s S1818 . 1 `uc 1 . 1 0 :2:0 
+[s S1752 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 RW1 1 0 :1:2 
 `uc 1 I2C_START1 1 0 :1:3 
 `uc 1 I2C_STOP2 1 0 :1:4 
 `uc 1 DA1 1 0 :1:5 
 ]
-[s S1824 . 1 `uc 1 . 1 0 :2:0 
+[s S1758 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 I2C_READ1 1 0 :1:2 
 `uc 1 S2 1 0 :1:3 
 `uc 1 P2 1 0 :1:4 
 `uc 1 DATA_ADDRESS1 1 0 :1:5 
 ]
-[s S1830 . 1 `uc 1 . 1 0 :2:0 
+[s S1764 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 READ_WRITE1 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 D_A1 1 0 :1:5 
 ]
-[s S1835 . 1 `uc 1 . 1 0 :5:0 
+[s S1769 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 D_NOT_A1 1 0 :1:5 
 ]
-[s S1838 . 1 `uc 1 . 1 0 :2:0 
+[s S1772 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R_W1 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 D_nA1 1 0 :1:5 
 ]
-[s S1843 . 1 `uc 1 . 1 0 :2:0 
+[s S1777 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R_NOT_W1 1 0 :1:2 
 ]
-[s S1846 . 1 `uc 1 . 1 0 :2:0 
+[s S1780 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R_nW1 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 I2C_DAT1 1 0 :1:5 
 ]
-[s S1851 . 1 `uc 1 . 1 0 :2:0 
+[s S1785 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 NOT_W2 1 0 :1:2 
 ]
-[s S1854 . 1 `uc 1 . 1 0 :5:0 
+[s S1788 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 NOT_A2 1 0 :1:5 
 ]
-[s S1857 . 1 `uc 1 . 1 0 :2:0 
+[s S1791 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 nW2 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 nA2 1 0 :1:5 
 ]
-[s S1862 . 1 `uc 1 . 1 0 :2:0 
+[s S1796 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 NOT_WRITE1 1 0 :1:2 
 ]
-[s S1865 . 1 `uc 1 . 1 0 :5:0 
+[s S1799 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 NOT_ADDRESS1 1 0 :1:5 
 ]
-[s S1868 . 1 `uc 1 . 1 0 :2:0 
+[s S1802 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 nWRITE1 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 nADDRESS1 1 0 :1:5 
 ]
-[u S1873 . 1 `S1756 1 . 1 0 `S1759 1 . 1 0 `S1762 1 . 1 0 `S1771 1 . 1 0 `S1776 1 . 1 0 `S1781 1 . 1 0 `S1784 1 . 1 0 `S1787 1 . 1 0 `S1792 1 . 1 0 `S1797 1 . 1 0 `S1803 1 . 1 0 `S1812 1 . 1 0 `S1818 1 . 1 0 `S1824 1 . 1 0 `S1830 1 . 1 0 `S1835 1 . 1 0 `S1838 1 . 1 0 `S1843 1 . 1 0 `S1846 1 . 1 0 `S1851 1 . 1 0 `S1854 1 . 1 0 `S1857 1 . 1 0 `S1862 1 . 1 0 `S1865 1 . 1 0 `S1868 1 . 1 0 ]
-[v _SSP1STATbits SSP1STATbits `VES1873  1 e 1 @3989 ]
+[u S1807 . 1 `S1690 1 . 1 0 `S1693 1 . 1 0 `S1696 1 . 1 0 `S1705 1 . 1 0 `S1710 1 . 1 0 `S1715 1 . 1 0 `S1718 1 . 1 0 `S1721 1 . 1 0 `S1726 1 . 1 0 `S1731 1 . 1 0 `S1737 1 . 1 0 `S1746 1 . 1 0 `S1752 1 . 1 0 `S1758 1 . 1 0 `S1764 1 . 1 0 `S1769 1 . 1 0 `S1772 1 . 1 0 `S1777 1 . 1 0 `S1780 1 . 1 0 `S1785 1 . 1 0 `S1788 1 . 1 0 `S1791 1 . 1 0 `S1796 1 . 1 0 `S1799 1 . 1 0 `S1802 1 . 1 0 ]
+[v _SSP1STATbits SSP1STATbits `VES1807  1 e 1 @3989 ]
 "18250
 [v _SSP1CON1 SSP1CON1 `VEuc  1 e 1 @3990 ]
 [s S504 . 1 `uc 1 SSPM 1 0 :4:0 
@@ -936,27 +909,35 @@ S_MASTER_10BIT_RESTART 11
 [v _GIE GIE `VEb  1 e 0 @32663 ]
 "354 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\doprnt.c
 [v _dpowers dpowers `C[10]ul  1 s 40 dpowers ]
+"3 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\errno.c
+[v _errno errno `i  1 e 2 0 ]
 "7 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\powers.c
 [v __powers_ _powers_ `C[13]d  1 e 39 0 ]
 "39
 [v __npowers_ _npowers_ `C[13]d  1 e 39 0 ]
 "10 C:\Users\Kenny\Dropbox\Quadcopter.X\calculations.c
 [v _rollAcc rollAcc `f  1 e 3 0 ]
-"20 C:\Users\Kenny\Dropbox\Quadcopter.X\calculations.h
+"11
+[v _pitchAcc pitchAcc `f  1 e 3 0 ]
+"16 C:\Users\Kenny\Dropbox\Quadcopter.X\calculations.h
+[v _accelAlpha accelAlpha `f  1 e 3 0 ]
+"17
+[v _gyroAlpha gyroAlpha `f  1 e 3 0 ]
+"20
 [v _roll roll `f  1 e 3 0 ]
-[s S2174 . 15 `f 1 q 3 0 `f 1 r 3 3 `f 1 x 3 6 `f 1 p 3 9 `f 1 k 3 12 ]
-"5 C:\Users\Kenny\Dropbox\Quadcopter.X\kalman.c
-[v _axState axState `S2174  1 e 15 0 ]
-"6
-[v _ayState ayState `S2174  1 e 15 0 ]
+[s S2110 . 15 `f 1 q 3 0 `f 1 r 3 3 `f 1 x 3 6 `f 1 p 3 9 `f 1 k 3 12 ]
+"6 C:\Users\Kenny\Dropbox\Quadcopter.X\kalman.c
+[v _axState axState `S2110  1 e 15 0 ]
 "7
-[v _azState azState `S2174  1 e 15 0 ]
+[v _ayState ayState `S2110  1 e 15 0 ]
 "8
-[v _gxState gxState `S2174  1 e 15 0 ]
+[v _azState azState `S2110  1 e 15 0 ]
 "9
-[v _gyState gyState `S2174  1 e 15 0 ]
+[v _gxState gxState `S2110  1 e 15 0 ]
 "10
-[v _gzState gzState `S2174  1 e 15 0 ]
+[v _gyState gyState `S2110  1 e 15 0 ]
+"11
+[v _gzState gzState `S2110  1 e 15 0 ]
 "13 C:\Users\Kenny\Dropbox\Quadcopter.X\main.c
 [v _throttle throttle `i  1 e 2 0 ]
 [s S426 . 6 `ui 1 address 2 0 `uc 1 length 1 2 `*.2uc 1 pbuffer 3 3 ]
@@ -1044,20 +1025,22 @@ S_MASTER_10BIT_RESTART 11
 "20 C:\Users\Kenny\Dropbox\Quadcopter.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
+"69
+[v main@val2 val2 `f  1 a 3 32 ]
 "68
-[v main@val val `f  1 a 3 26 ]
+[v main@val val `f  1 a 3 29 ]
 "23
-[v main@show show `i  1 a 2 24 ]
+[v main@show show `i  1 a 2 27 ]
 "22
-[v main@c c `uc  1 a 1 23 ]
-"79
+[v main@c c `uc  1 a 1 26 ]
+"77
 } 0
-"89
+"87
 [v _unlockI2C unlockI2C `(v  1 e 1 0 ]
 {
-"90
+"88
 [v unlockI2C@i i `ui  1 a 2 19 ]
-"96
+"94
 } 0
 "7 C:\Users\Kenny\Dropbox\Quadcopter.X\sensors.c
 [v _sensors_Init sensors_Init `(v  1 e 1 0 ]
@@ -1163,22 +1146,22 @@ S_MASTER_10BIT_RESTART 11
 [v _printf printf `(i  1 e 2 0 ]
 {
 "528
-[v printf@val val `ul  1 a 4 13 ]
-[u S2277 . 4 `ul 1 vd 4 0 `d 1 integ 3 0 ]
+[v printf@val val `ul  1 a 4 66 ]
+[u S2213 . 4 `ul 1 vd 4 0 `d 1 integ 3 0 ]
 "526
-[v printf@tmpval tmpval `S2277  1 a 4 9 ]
+[v printf@tmpval tmpval `S2213  1 a 4 62 ]
 "516
-[v printf@fval fval `d  1 a 3 19 ]
+[v printf@fval fval `d  1 a 3 72 ]
 "504
-[v printf@prec prec `i  1 a 2 17 ]
+[v printf@prec prec `i  1 a 2 70 ]
 "516
-[v printf@exp exp `i  1 a 2 7 ]
+[v printf@exp exp `i  1 a 2 60 ]
 "508
-[v printf@flag flag `us  1 a 2 5 ]
+[v printf@flag flag `us  1 a 2 58 ]
 "466
-[v printf@ap ap `[1]*.39v  1 a 2 3 ]
+[v printf@ap ap `[1]*.39v  1 a 2 56 ]
 "499
-[v printf@c c `c  1 a 1 22 ]
+[v printf@c c `c  1 a 1 75 ]
 "464
 [v printf@f f `*.32Cuc  1 p 2 34 ]
 "1541
@@ -1226,16 +1209,6 @@ S_MASTER_10BIT_RESTART 11
 "413
 [v fround@prec prec `uc  1 a 1 6 ]
 "418
-} 0
-"15 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\Umul16.c
-[v ___wmul __wmul `(ui  1 e 2 0 ]
-{
-"17
-[v ___wmul@product product `ui  1 a 2 36 ]
-"15
-[v ___wmul@multiplier multiplier `ui  1 p 2 32 ]
-[v ___wmul@multiplicand multiplicand `ui  1 p 2 34 ]
-"53
 } 0
 "8 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\awmod.c
 [v ___awmod __awmod `(i  1 e 2 0 ]
@@ -1366,28 +1339,28 @@ S_MASTER_10BIT_RESTART 11
 [v pitchPid@desiredPitch desiredPitch `f  1 p 3 18 ]
 "80
 } 0
-"13 C:\Users\Kenny\Dropbox\Quadcopter.X\kalman.c
+"14 C:\Users\Kenny\Dropbox\Quadcopter.X\kalman.c
 [v _kalman_Init kalman_Init `(v  1 e 1 0 ]
 {
-"47
+"48
 } 0
-"81 C:\Users\Kenny\Dropbox\Quadcopter.X\main.c
+"79 C:\Users\Kenny\Dropbox\Quadcopter.X\main.c
 [v _interrupt_Init interrupt_Init `(v  1 e 1 0 ]
 {
-"87
+"85
 } 0
-"60 C:\Users\Kenny\Dropbox\Quadcopter.X\kalman.c
+"61 C:\Users\Kenny\Dropbox\Quadcopter.X\kalman.c
 [v _filterData filterData `(v  1 e 1 0 ]
 {
-"74
+"76
 } 0
-"49
+"50
 [v _kalmanUpdate kalmanUpdate `(v  1 e 1 0 ]
 {
-[s S2174 . 15 `f 1 q 3 0 `f 1 r 3 3 `f 1 x 3 6 `f 1 p 3 9 `f 1 k 3 12 ]
-[v kalmanUpdate@state state `*.39S2174  1 p 2 34 ]
+[s S2110 . 15 `f 1 q 3 0 `f 1 r 3 3 `f 1 x 3 6 `f 1 p 3 9 `f 1 k 3 12 ]
+[v kalmanUpdate@state state `*.39S2110  1 p 2 34 ]
 [v kalmanUpdate@measurement measurement `f  1 p 3 36 ]
-"58
+"59
 } 0
 "14 C:\Users\Kenny\Dropbox\Quadcopter.X\calculations.c
 [v _computeRollPitch computeRollPitch `(v  1 e 1 0 ]
@@ -1395,43 +1368,64 @@ S_MASTER_10BIT_RESTART 11
 "18
 [v computeRollPitch@dt dt `f  1 a 3 0 ]
 "17
-[v computeRollPitch@tmr0val tmr0val `ui  1 a 2 12 ]
-"32
+[v computeRollPitch@tmr0val tmr0val `ui  1 a 2 24 ]
+"35
 } 0
-"34
+"37
 [v _fastatan2 fastatan2 `(f  1 e 3 0 ]
 {
-"37
+"40
 [v fastatan2@r r `f  1 a 3 55 ]
-"35
+"38
 [v fastatan2@a a `f  1 a 3 52 ]
-"36
+"39
 [v fastatan2@s s `f  1 a 3 49 ]
-"34
+"37
 [v fastatan2@x x `f  1 p 3 34 ]
 [v fastatan2@y y `f  1 p 3 37 ]
-"57
+"60
 } 0
-"67
+"70
 [v _minimum minimum `(f  1 e 3 0 ]
 {
 [v minimum@x x `f  1 p 3 12 ]
 [v minimum@y y `f  1 p 3 15 ]
-"73
+"76
 } 0
-"59
+"62
 [v _maximum maximum `(f  1 e 3 0 ]
 {
 [v maximum@x x `f  1 p 3 12 ]
 [v maximum@y y `f  1 p 3 15 ]
-"65
+"68
 } 0
-"4 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\ftge.c
-[v ___ftge __ftge `(b  1 e 0 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\atan2.c
+[v _atan2 atan2 `(d  1 e 3 0 ]
 {
-[v ___ftge@ff1 ff1 `f  1 p 3 3 ]
-[v ___ftge@ff2 ff2 `f  1 p 3 6 ]
-"13
+"10
+[v atan2@v v `d  1 a 3 62 ]
+"8
+[v atan2@y y `d  1 p 3 50 ]
+[v atan2@x x `d  1 p 3 53 ]
+"47
+} 0
+"8 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\atan.c
+[v _atan atan `(d  1 e 3 0 ]
+{
+"28
+[v atan@val val `d  1 a 3 47 ]
+[v atan@val_squared val_squared `d  1 a 3 44 ]
+[v atan@x x `d  1 a 3 40 ]
+[v atan@y y `d  1 a 3 37 ]
+"27
+[v atan@recip recip `uc  1 a 1 43 ]
+"8
+[v atan@f f `d  1 p 3 34 ]
+"10
+[v atan@coeff_a coeff_a `C[6]d  1 s 18 coeff_a ]
+"19
+[v atan@coeff_b coeff_b `C[5]d  1 s 15 coeff_b ]
+"41
 } 0
 "4 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\fabs.c
 [v _fabs fabs `(d  1 e 3 0 ]
@@ -1444,6 +1438,27 @@ S_MASTER_10BIT_RESTART 11
 {
 [v ___ftneg@f1 f1 `f  1 p 3 53 ]
 "20
+} 0
+"4 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\evalpoly.c
+[v _eval_poly eval_poly `(d  1 e 3 0 ]
+{
+"6
+[v eval_poly@res res `d  1 a 3 28 ]
+"4
+[v eval_poly@x x `d  1 p 3 19 ]
+[v eval_poly@d d `*.32Cd  1 p 2 22 ]
+[v eval_poly@n n `i  1 p 2 24 ]
+"12
+} 0
+"15 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+{
+"17
+[v ___wmul@product product `ui  1 a 2 36 ]
+"15
+[v ___wmul@multiplier multiplier `ui  1 p 2 32 ]
+[v ___wmul@multiplicand multiplicand `ui  1 p 2 34 ]
+"53
 } 0
 "62 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\ftmul.c
 [v ___ftmul __ftmul `(f  1 e 3 0 ]
@@ -1459,6 +1474,13 @@ S_MASTER_10BIT_RESTART 11
 [v ___ftmul@f2 f2 `f  1 p 3 41 ]
 "157
 } 0
+"4 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\ftge.c
+[v ___ftge __ftge `(b  1 e 0 0 ]
+{
+[v ___ftge@ff1 ff1 `f  1 p 3 3 ]
+[v ___ftge@ff2 ff2 `f  1 p 3 6 ]
+"13
+} 0
 "54 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\ftdiv.c
 [v ___ftdiv __ftdiv `(f  1 e 3 0 ]
 {
@@ -1472,12 +1494,6 @@ S_MASTER_10BIT_RESTART 11
 [v ___ftdiv@f1 f1 `f  1 p 3 19 ]
 [v ___ftdiv@f2 f2 `f  1 p 3 22 ]
 "86
-} 0
-"28 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\lwtoft.c
-[v ___lwtoft __lwtoft `(f  1 e 3 0 ]
-{
-[v ___lwtoft@c c `ui  1 p 2 26 ]
-"31
 } 0
 "20 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\ftsub.c
 [v ___ftsub __ftsub `(f  1 e 3 0 ]
@@ -1497,6 +1513,12 @@ S_MASTER_10BIT_RESTART 11
 [v ___ftadd@f1 f1 `f  1 p 3 7 ]
 [v ___ftadd@f2 f2 `f  1 p 3 10 ]
 "148
+} 0
+"28 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\lwtoft.c
+[v ___lwtoft __lwtoft `(f  1 e 3 0 ]
+{
+[v ___lwtoft@c c `ui  1 p 2 26 ]
+"31
 } 0
 "62 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\float.c
 [v ___ftpack __ftpack `(f  1 e 3 0 ]

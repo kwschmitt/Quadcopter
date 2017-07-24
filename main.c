@@ -29,19 +29,22 @@ void main(void)
     SYSTEM_Initialize();
     interrupt_Init();
     sensors_Init();
-    kalman_Init();
     pid_Init();
-    TRISBbits.TRISB4 = 0;
+    kalman_Init();  
     
     // Wait for 5 seconds to start
+    accelAlpha = 0;
+    gyroAlpha = 0;
     while ( !begin ) {readSensors(); filterData(); computeRollPitch();}
-    
+    accelAlpha = .95;
+    gyroAlpha = .995;
+
     // Main loop
     while (1)
     {
         readSensors();
         filterData();
-        computeRollPitch();    
+        computeRollPitch(); 
         pid( -5.7, 0, 0 );
         
         if ( PIR3bits.RC1IF ) {
@@ -54,27 +57,22 @@ void main(void)
                 case 's':rollkd-=.05; break;
                 case 'e':rollki+=.001; break;
                 case 'd':rollki-=.001; break;
-                
                 case 't':throttle+=2; break;
                 case 'g':throttle-=2; break;
-                                
                 case 'z':show^=1; break;
-                
                 default: break;
             }
             printf( "kp: %.2f   kd: %.2f   ki: %.3f   throttle: %i \n\r", rollkp, rollkd, rollki, throttle );
         }
         if (show) {
             float val = roll*100;
+            float val2 = 100;
             EUSART1_Write(0xAA);    
-            EUSART1_Write(((int)(gx))>>8);
-            EUSART1_Write(((int)(gx)));
+            EUSART1_Write(((int)(val2))>>8);
+            EUSART1_Write(((int)(val2)));
             EUSART1_Write(((int)(val))>>8);
             EUSART1_Write((int)(val));
-            
         }
-        
-        LATBbits.LATB4 ^= 1;
     }
 }
 

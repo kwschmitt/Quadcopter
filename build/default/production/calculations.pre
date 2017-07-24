@@ -92,7 +92,11 @@ extern double fmod(double, double);
 extern double trunc(double);
 extern double round(double);
 
-# 20 "calculations.h"
+# 16 "calculations.h"
+float accelAlpha = .8;
+float gyroAlpha = .995;
+
+
 float roll = 0;
 float pitch = 0;
 float yaw = 0;
@@ -393,17 +397,20 @@ uint16_t tmr0val = TMR0_Read16bitTimer();
 float dt = ((float)tmr0val) * .0000001666667;
 
 
-rollAcc = rollAcc * (.8) + fastatan2(-ay, az)*(1-.8);
-roll -= (gx*.0175) * dt;
-
-if (accCounter >= 20) {
-accCounter = 0;
-roll = roll*.985 + rollAcc*(1-.985);
-}
-
-
 TMR0_Write16bitTimer(0);
 TMR0_StartTimer();
+
+
+rollAcc = rollAcc * (accelAlpha) + fastatan2(-ay, az)*(1-accelAlpha);
+roll -= (gx*.0175) * dt;
+
+
+pitchAcc = atan2(-ay, az)*(1-accelAlpha);
+
+if (accCounter >= 10) {
+accCounter = 0;
+roll = roll*gyroAlpha + rollAcc*(1-gyroAlpha);
+}
 }
 
 float fastatan2( float x, float y ) {

@@ -8,18 +8,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _interrupt_Init `(v ~T0 @X0 0 ef ]
 "29 sensors.h
 [v _sensors_Init `(v ~T0 @X0 0 ef ]
-"25 kalman.h
-[v _kalman_Init `(v ~T0 @X0 0 ef ]
 "43 pid.h
 [v _pid_Init `(v ~T0 @X0 0 ef ]
-"16650 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic18f47k40.h
-[s S806 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S806 . TRISB0 TRISB1 TRISB2 TRISB3 TRISB4 TRISB5 TRISB6 TRISB7 ]
-"16649
-[u S805 `S806 1 ]
-[n S805 . . ]
-"16661
-[v _TRISBbits `VS805 ~T0 @X0 0 e@3977 ]
+"25 kalman.h
+[v _kalman_Init `(v ~T0 @X0 0 ef ]
 "32 sensors.h
 [v _readSensors `(v ~T0 @X0 0 ef ]
 "27 kalman.h
@@ -45,18 +37,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _printf `(i ~T0 @X0 0 ev`*Cuc ]
 "135 mcc_generated_files/eusart1.h
 [v _EUSART1_Write `(v ~T0 @X0 0 ef1`uc ]
-"16090 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic18f47k40.h
-[s S785 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S785 . LATB0 LATB1 LATB2 LATB3 LATB4 LATB5 LATB6 LATB7 ]
-"16100
-[s S786 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S786 . LB0 LB1 LB2 LB3 LB4 LB5 LB6 LB7 ]
-"16089
-[u S784 `S785 1 `S786 1 ]
-[n S784 . . . ]
-"16111
-[v _LATBbits `VS784 ~T0 @X0 0 e@3972 ]
-"26519
+"26519 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic18f47k40.h
 [s S1341 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S1341 . INT0EDG INT1EDG INT2EDG . IPEN PEIE_GIEL GIE_GIEH ]
 "26528
@@ -10980,7 +10961,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;kalman.h: 25: void kalman_Init(void);
 [; ;kalman.h: 26: void kalmanUpdate(kalman_state* state, float measurement);
 [; ;kalman.h: 27: void filterData(void);
-"20 calculations.h
+"16 calculations.h
+[v _accelAlpha `f ~T0 @X0 1 e ]
+[i _accelAlpha
+-> .0.8 `f
+]
+[; ;calculations.h: 16: float accelAlpha = .8;
+"17
+[v _gyroAlpha `f ~T0 @X0 1 e ]
+[i _gyroAlpha
+-> .0.995 `f
+]
+[; ;calculations.h: 17: float gyroAlpha = .995;
+"20
 [v _roll `f ~T0 @X0 1 e ]
 [i _roll
 -> -> 0 `i `f
@@ -11289,17 +11282,20 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 31: sensors_Init();
 "31
 [e ( _sensors_Init ..  ]
-[; ;main.c: 32: kalman_Init();
+[; ;main.c: 32: pid_Init();
 "32
-[e ( _kalman_Init ..  ]
-[; ;main.c: 33: pid_Init();
-"33
 [e ( _pid_Init ..  ]
-[; ;main.c: 34: TRISBbits.TRISB4 = 0;
-"34
-[e = . . _TRISBbits 0 4 -> -> 0 `i `uc ]
-[; ;main.c: 37: while ( !begin ) {readSensors(); filterData(); computeRollPitch();}
+[; ;main.c: 33: kalman_Init();
+"33
+[e ( _kalman_Init ..  ]
+[; ;main.c: 36: accelAlpha = 0;
+"36
+[e = _accelAlpha -> -> 0 `i `f ]
+[; ;main.c: 37: gyroAlpha = 0;
 "37
+[e = _gyroAlpha -> -> 0 `i `f ]
+[; ;main.c: 38: while ( !begin ) {readSensors(); filterData(); computeRollPitch();}
+"38
 [e $U 1379  ]
 [e :U 1380 ]
 {
@@ -11310,77 +11306,83 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 1379 ]
 [e $ ! != -> _begin `i -> -> -> 0 `i `uc `i 1380  ]
 [e :U 1381 ]
-[; ;main.c: 40: while (1)
+[; ;main.c: 39: accelAlpha = .95;
+"39
+[e = _accelAlpha -> .0.95 `f ]
+[; ;main.c: 40: gyroAlpha = .995;
 "40
-[e :U 1383 ]
-[; ;main.c: 41: {
-"41
-{
-[; ;main.c: 42: readSensors();
-"42
-[e ( _readSensors ..  ]
-[; ;main.c: 43: filterData();
+[e = _gyroAlpha -> .0.995 `f ]
+[; ;main.c: 43: while (1)
 "43
-[e ( _filterData ..  ]
-[; ;main.c: 44: computeRollPitch();
+[e :U 1383 ]
+[; ;main.c: 44: {
 "44
-[e ( _computeRollPitch ..  ]
-[; ;main.c: 45: pid( -5.7, 0, 0 );
+{
+[; ;main.c: 45: readSensors();
 "45
-[e ( _pid (3 , , -> -U .5.7 `f -> -> 0 `i `f -> -> 0 `i `f ]
-[; ;main.c: 47: if ( PIR3bits.RC1IF ) {
+[e ( _readSensors ..  ]
+[; ;main.c: 46: filterData();
+"46
+[e ( _filterData ..  ]
+[; ;main.c: 47: computeRollPitch();
 "47
+[e ( _computeRollPitch ..  ]
+[; ;main.c: 48: pid( -5.7, 0, 0 );
+"48
+[e ( _pid (3 , , -> -U .5.7 `f -> -> 0 `i `f -> -> 0 `i `f ]
+[; ;main.c: 50: if ( PIR3bits.RC1IF ) {
+"50
 [e $ ! != -> . . _PIR3bits 0 5 `i -> -> -> 0 `i `Vuc `i 1385  ]
 {
-[; ;main.c: 48: c = EUSART1_Read();
-"48
+[; ;main.c: 51: c = EUSART1_Read();
+"51
 [e = _c ( _EUSART1_Read ..  ]
-[; ;main.c: 50: switch(c){
-"50
+[; ;main.c: 53: switch(c){
+"53
 [e $U 1387  ]
 {
-[; ;main.c: 51: case 'q':rollkp+=.01; break;
-"51
+[; ;main.c: 54: case 'q':rollkp+=.01; break;
+"54
 [e :U 1388 ]
 [e =+ _rollkp -> .0.01 `f ]
 [e $U 1386  ]
-[; ;main.c: 52: case 'a':rollkp-=.01; break;
-"52
+[; ;main.c: 55: case 'a':rollkp-=.01; break;
+"55
 [e :U 1389 ]
 [e =- _rollkp -> .0.01 `f ]
 [e $U 1386  ]
-[; ;main.c: 53: case 'w':rollkd+=.05; break;
-"53
+[; ;main.c: 56: case 'w':rollkd+=.05; break;
+"56
 [e :U 1390 ]
 [e =+ _rollkd -> .0.05 `f ]
 [e $U 1386  ]
-[; ;main.c: 54: case 's':rollkd-=.05; break;
-"54
+[; ;main.c: 57: case 's':rollkd-=.05; break;
+"57
 [e :U 1391 ]
 [e =- _rollkd -> .0.05 `f ]
 [e $U 1386  ]
-[; ;main.c: 55: case 'e':rollki+=.001; break;
-"55
+[; ;main.c: 58: case 'e':rollki+=.001; break;
+"58
 [e :U 1392 ]
 [e =+ _rollki -> .0.001 `f ]
 [e $U 1386  ]
-[; ;main.c: 56: case 'd':rollki-=.001; break;
-"56
+[; ;main.c: 59: case 'd':rollki-=.001; break;
+"59
 [e :U 1393 ]
 [e =- _rollki -> .0.001 `f ]
 [e $U 1386  ]
-[; ;main.c: 58: case 't':throttle+=2; break;
-"58
+[; ;main.c: 60: case 't':throttle+=2; break;
+"60
 [e :U 1394 ]
 [e =+ _throttle -> 2 `i ]
 [e $U 1386  ]
-[; ;main.c: 59: case 'g':throttle-=2; break;
-"59
+[; ;main.c: 61: case 'g':throttle-=2; break;
+"61
 [e :U 1395 ]
 [e =- _throttle -> 2 `i ]
 [e $U 1386  ]
-[; ;main.c: 61: case 'z':show^=1; break;
-"61
+[; ;main.c: 62: case 'z':show^=1; break;
+"62
 [e :U 1396 ]
 [e =^ _show -> 1 `i ]
 [e $U 1386  ]
@@ -11392,7 +11394,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 [; ;main.c: 64: }
 [e $U 1386  ]
-"50
+"53
 [e :U 1387 ]
 [e [\ _c , $ -> -> 113 `ui `uc 1388
  , $ -> -> 97 `ui `uc 1389
@@ -11421,93 +11423,94 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _val `f ~T0 @X0 1 a ]
 [; ;main.c: 68: float val = roll*100;
 [e = _val * _roll -> -> 100 `i `f ]
-[; ;main.c: 69: EUSART1_Write(0xAA);
 "69
-[e ( _EUSART1_Write (1 -> -> 170 `i `uc ]
-[; ;main.c: 70: EUSART1_Write(((int)(gx))>>8);
+[v _val2 `f ~T0 @X0 1 a ]
+[; ;main.c: 69: float val2 = 100;
+[e = _val2 -> -> 100 `i `f ]
+[; ;main.c: 70: EUSART1_Write(0xAA);
 "70
-[e ( _EUSART1_Write (1 -> >> -> _gx `i -> 8 `i `uc ]
-[; ;main.c: 71: EUSART1_Write(((int)(gx)));
+[e ( _EUSART1_Write (1 -> -> 170 `i `uc ]
+[; ;main.c: 71: EUSART1_Write(((int)(val2))>>8);
 "71
-[e ( _EUSART1_Write (1 -> -> _gx `i `uc ]
-[; ;main.c: 72: EUSART1_Write(((int)(val))>>8);
+[e ( _EUSART1_Write (1 -> >> -> _val2 `i -> 8 `i `uc ]
+[; ;main.c: 72: EUSART1_Write(((int)(val2)));
 "72
-[e ( _EUSART1_Write (1 -> >> -> _val `i -> 8 `i `uc ]
-[; ;main.c: 73: EUSART1_Write((int)(val));
+[e ( _EUSART1_Write (1 -> -> _val2 `i `uc ]
+[; ;main.c: 73: EUSART1_Write(((int)(val))>>8);
 "73
+[e ( _EUSART1_Write (1 -> >> -> _val `i -> 8 `i `uc ]
+[; ;main.c: 74: EUSART1_Write((int)(val));
+"74
 [e ( _EUSART1_Write (1 -> -> _val `i `uc ]
 "75
 }
 [e :U 1398 ]
-[; ;main.c: 75: }
-[; ;main.c: 77: LATBbits.LATB4 ^= 1;
-"77
-[e =^ . . _LATBbits 0 4 -> -> 1 `i `uc ]
-"78
+"76
 }
 [e :U 1382 ]
-"40
+"43
 [e $U 1383  ]
 [e :U 1384 ]
-[; ;main.c: 78: }
-[; ;main.c: 79: }
-"79
+[; ;main.c: 75: }
+[; ;main.c: 76: }
+[; ;main.c: 77: }
+"77
 [e :UE 1378 ]
 }
-"81
+"79
 [v _interrupt_Init `(v ~T0 @X0 1 ef ]
 {
-[; ;main.c: 81: void interrupt_Init() {
+[; ;main.c: 79: void interrupt_Init() {
 [e :U _interrupt_Init ]
 [f ]
-[; ;main.c: 83: INTCONbits.GIE = 1;
-"83
+[; ;main.c: 81: INTCONbits.GIE = 1;
+"81
 [e = . . _INTCONbits 1 2 -> -> 1 `i `uc ]
-[; ;main.c: 86: INTCONbits.PEIE = 1;
-"86
+[; ;main.c: 84: INTCONbits.PEIE = 1;
+"84
 [e = . . _INTCONbits 1 1 -> -> 1 `i `uc ]
-[; ;main.c: 87: }
-"87
+[; ;main.c: 85: }
+"85
 [e :UE 1399 ]
 }
-"89
+"87
 [v _unlockI2C `(v ~T0 @X0 1 ef ]
 {
-[; ;main.c: 89: void unlockI2C(void) {
+[; ;main.c: 87: void unlockI2C(void) {
 [e :U _unlockI2C ]
 [f ]
-"90
+"88
 [v _i `ui ~T0 @X0 1 a ]
-[; ;main.c: 90: unsigned int i = 0;
+[; ;main.c: 88: unsigned int i = 0;
 [e = _i -> -> 0 `i `ui ]
-[; ;main.c: 91: TRISCbits.TRISC3 = 0;
-"91
+[; ;main.c: 89: TRISCbits.TRISC3 = 0;
+"89
 [e = . . _TRISCbits 0 3 -> -> 0 `i `uc ]
-[; ;main.c: 92: for ( i = 0; i < 40; i++ ) {
-"92
+[; ;main.c: 90: for ( i = 0; i < 40; i++ ) {
+"90
 {
 [e = _i -> -> 0 `i `ui ]
 [e $ < _i -> -> 40 `i `ui 1401  ]
 [e $U 1402  ]
 [e :U 1401 ]
 {
-[; ;main.c: 93: LATCbits.LATC3 ^= 1;
-"93
+[; ;main.c: 91: LATCbits.LATC3 ^= 1;
+"91
 [e =^ . . _LATCbits 0 3 -> -> 1 `i `uc ]
-[; ;main.c: 94: _delay((unsigned long)((10)*(48000000/4000.0)));
-"94
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 48000000 `l `d .4000.0 `ul ]
-"95
-}
+[; ;main.c: 92: _delay((unsigned long)((10)*(48000000/4000.0)));
 "92
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 48000000 `l `d .4000.0 `ul ]
+"93
+}
+"90
 [e ++ _i -> -> 1 `i `ui ]
 [e $ < _i -> -> 40 `i `ui 1401  ]
 [e :U 1402 ]
-"95
+"93
 }
-[; ;main.c: 95: }
-[; ;main.c: 96: }
-"96
+[; ;main.c: 93: }
+[; ;main.c: 94: }
+"94
 [e :UE 1400 ]
 }
 [p f _printf 8462464 ]
